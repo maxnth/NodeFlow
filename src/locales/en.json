@@ -1,30 +1,19 @@
 {
   "common": {
-    "light": "Hell",
-    "dark": "Dunkel",
+    "light": "Light",
+    "dark": "Dark",
     "theme": "Theme",
-    "language": "Sprache"
+    "language": "Language"
   },
-
-  "pageTitles": {
-    "dashboard": "Dashboard",
-    "workflow-editor": "Workflow Editor",
-    "tour": "Tour"
+  "sidebar": {
+    "cta": {
+      "heading": "Alpha release",
+      "content": "This version of NodeFlow is an early alpha release of the software and may still contain severe bugs and missing features."
+    }
   },
-
-  "homepage": {
-    "goToHome": "Go to Home",
-    "recommendedIdeSetup": "Recommended IDE setup",
-    "seeForMoreInfo": "See <code>README.md</code> for more information.",
-    "countIs": "count is",
-    "toTestHotModule": "Edit <code>components/HelloWorld.vue</code> to test hot module replacement"
-  },
-
-  "aboutPage": {
-    "goToAbout": "Go to About"
-  },
-
-  "footer": {
-    "placeStaticFiles": "Place static files into the <code>/public</code> folder"
+  "404": {
+    "heading": "Something's missing.",
+    "content": "Sorry, we can't find that page. You'll find lots to explore on the Dashboard.",
+    "link": "Back to Dashboard"
   }
 }

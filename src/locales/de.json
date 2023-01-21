@@ -1,29 +1,19 @@
 {
   "common": {
-    "light": "সাদা",
-    "dark": "কালো",
-    "theme": "থিম",
-    "language": "ভাষা"
+    "light": "",
+    "dark": "",
+    "theme": "",
+    "language": ""
   },
-
-  "pageTitles": {
-    "home": "প্রধান পৃষ্ঠা",
-    "about": "পরিচিতি পৃষ্ঠা"
+  "sidebar": {
+    "cta": {
+      "heading": "Alpha release",
+      "content": "Diese Version von NodeFLow ist noch eine frühe Alpha-Version und kann noch schwerwiegende Fehler und fehlende Features beinhalten."
+    }
   },
-
-  "homepage": {
-    "goToHome": "প্রধান পৃষ্ঠাতে যাও",
-    "recommendedIdeSetup": "IDE সেট করতে দেখুন",
-    "seeForMoreInfo": "বেশি তথ্যর জন্য <code>README.md</code> পড়ুন",
-    "countIs": "গণনা হলো",
-    "toTestHotModule": "Hot module replacement পরীক্ষা করতে <code>components/HelloWorld.vue</code> পরিবর্তন করুন"
-  },
-
-  "aboutPage": {
-    "goToAbout": "পরিচিতি পৃষ্ঠাতে যাও"
-  },
-
-  "footer": {
-    "placeStaticFiles": "Static files গুলো <code>/public</code> ফোল্ডারএ রাখুন"
+  "404": {
+    "heading": "Seite nicht gefunden",
+    "content": "Entschuldigung, leider konnte diese Seite nicht gefunden werden. Versuche es doch einmal auf dem Dashboard.",
+    "link": "Zurück zum Dashboard"
   }
 }

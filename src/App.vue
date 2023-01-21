@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import Sidebar from './components/Layout/Sidebar.vue';
-
-// const { t, availableLocales, locale } = useI18n();
 </script>
 
 <template>
