@@ -1,0 +1,35 @@
+/**
+ * @see https://www.electron.build/configuration/configuration
+ */
+{
+  appId: 'NodeFlow',
+  asar: true,
+  icon: 'public/favicon.ico',
+  directories: {
+    output: 'release/${version}',
+  },
+  files: ['dist-electron', 'dist'],
+  mac: {
+    artifactName: '${productName}_${version}.${ext}',
+    target: ['dmg'],
+  },
+  win: {
+    target: [
+      {
+        target: 'msi',
+        arch: ['x64'],
+      },
+    ],
+    artifactName: '${productName}_${version}.${ext}',
+  },
+  linux: {
+    target: ['deb', 'rpm', 'AppImage'],
+    category: 'Development',
+  },
+  nsis: {
+    oneClick: false,
+    perMachine: false,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: false,
+  },
+}

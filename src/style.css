@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  code {
+    @apply mx-2 rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-700;
+  }
+
+  a {
+    @apply text-[#42b983];
+  }
+}
+
+.border-trueblack {
+  border-color: black;
+}
+
+::-webkit-scrollbar {
+  background-color: #2B2B2B;
+  border-left: 1px solid #3E3E3E;
+  width: .65rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background:  #6B6B6B;
+  border-radius: 10px;
+}
+
+.router-link-exact-active {
+  @apply bg-gray-200 dark:bg-gray-700;
+}
