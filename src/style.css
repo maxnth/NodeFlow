@@ -30,3 +30,8 @@
 .router-link-exact-active {
   @apply bg-gray-200 dark:bg-gray-700;
 }
+
+.minimap{
+  height: auto !important;
+  width: auto !important;
+}

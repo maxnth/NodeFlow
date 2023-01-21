@@ -2,7 +2,6 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import { createI18n } from 'vue-i18n';
 
-import './style.css';
 import App from './App.vue';
 
 import './samples/node-api';
@@ -17,6 +16,8 @@ import "primevue/resources/themes/tailwind-light/theme.css";
 import 'primeicons/primeicons.css'
 import SpeedDial from "primevue/speeddial";
 import Dropdown from "primevue/dropdown";
+
+import './style.css';
 
 const app = createApp(App);
 
