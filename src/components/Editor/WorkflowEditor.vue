@@ -42,7 +42,7 @@ export default {
     autoimportNodes(this.editor);
 
     // add some nodes so the screen is not empty on startup
-    this.addNodeWithCoordinates(InputNode, 100, 140);
+    this.addNodeWithCoordinates(InputNode, 100, 350);
 
     this.engine.calculate();
   },
