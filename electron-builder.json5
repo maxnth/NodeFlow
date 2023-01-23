@@ -13,7 +13,7 @@
   mac: {
     artifactName: '${productName}_${version}.${ext}',
     target: ['dmg'],
-    icon: 'public/icon.png'
+    icon: 'public/icon.png',
   },
   win: {
     target: [
@@ -28,7 +28,7 @@
   linux: {
     target: ['AppImage'],
     category: 'Productivity',
-    icon: 'public/icon.png'
+    icon: 'public/icon.png',
   },
   nsis: {
     oneClick: false,
