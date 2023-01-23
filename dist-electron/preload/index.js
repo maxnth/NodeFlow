@@ -1,39 +1,11 @@
-"use strict";
-function domReady(condition = ["complete", "interactive"]) {
-  return new Promise((resolve) => {
-    if (condition.includes(document.readyState)) {
-      resolve(true);
-    } else {
-      document.addEventListener("readystatechange", () => {
-        if (condition.includes(document.readyState)) {
-          resolve(true);
-        }
-      });
-    }
-  });
-}
-const safeDOM = {
-  append(parent, child) {
-    if (!Array.from(parent.children).find((e) => e === child)) {
-      return parent.appendChild(child);
-    }
-  },
-  remove(parent, child) {
-    if (Array.from(parent.children).find((e) => e === child)) {
-      return parent.removeChild(child);
-    }
-  }
-};
-function useLoading() {
-  const className = `loaders-css__square-spin`;
-  const styleContent = `
+"use strict";function r(e=["complete","interactive"]){return new Promise(t=>{e.includes(document.readyState)?t(!0):document.addEventListener("readystatechange",()=>{e.includes(document.readyState)&&t(!0)})})}const o={append(e,t){if(!Array.from(e.children).find(n=>n===t))return e.appendChild(t)},remove(e,t){if(Array.from(e.children).find(n=>n===t))return e.removeChild(t)}};function d(){const e="loaders-css__square-spin",t=`
 @keyframes square-spin {
   25% { transform: perspective(100px) rotateX(180deg) rotateY(0); }
   50% { transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
   75% { transform: perspective(100px) rotateX(0) rotateY(180deg); }
   100% { transform: perspective(100px) rotateX(0) rotateY(0); }
 }
-.${className} > div {
+.${e} > div {
   animation-fill-mode: both;
   width: 50px;
   height: 50px;
@@ -52,28 +24,4 @@ function useLoading() {
   background: #282c34;
   z-index: 9;
 }
-    `;
-  const oStyle = document.createElement("style");
-  const oDiv = document.createElement("div");
-  oStyle.id = "app-loading-style";
-  oStyle.innerHTML = styleContent;
-  oDiv.className = "app-loading-wrap";
-  oDiv.innerHTML = `<div class="${className}"><div></div></div>`;
-  return {
-    appendLoading() {
-      safeDOM.append(document.head, oStyle);
-      safeDOM.append(document.body, oDiv);
-    },
-    removeLoading() {
-      safeDOM.remove(document.head, oStyle);
-      safeDOM.remove(document.body, oDiv);
-    }
-  };
-}
-const { appendLoading, removeLoading } = useLoading();
-domReady().then(appendLoading);
-window.onmessage = (ev) => {
-  ev.data.payload === "removeLoading" && removeLoading();
-};
-setTimeout(removeLoading, 4999);
-//# sourceMappingURL=index.js.map
+    `,n=document.createElement("style"),a=document.createElement("div");return n.id="app-loading-style",n.innerHTML=t,a.className="app-loading-wrap",a.innerHTML=`<div class="${e}"><div></div></div>`,{appendLoading(){o.append(document.head,n),o.append(document.body,a)},removeLoading(){o.remove(document.head,n),o.remove(document.body,a)}}}const{appendLoading:s,removeLoading:i}=d();r().then(s);window.onmessage=e=>{e.data.payload==="removeLoading"&&i()};setTimeout(i,4999);

@@ -19,6 +19,10 @@ import Dropdown from 'primevue/dropdown';
 
 import Menubar from 'primevue/menubar';
 
+// @ts-ignore
+import VueShepherd from 'vue-shepherd';
+import 'shepherd.js/dist/css/shepherd.css';
+
 import './style.css';
 
 const app = createApp(App);
@@ -48,6 +52,7 @@ app.use(createPinia());
 app.use(router);
 app.use(BaklavaVuePlugin);
 app.use(PrimeVue);
+app.use(VueShepherd);
 
 // PrimeVue components
 app.component('SpeedDial', SpeedDial);
