@@ -1,4 +1,4 @@
-import {createRouter, RouteRecordRaw, createWebHashHistory} from 'vue-router';
+import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
 
 import DashboardPage from '../views/DashboardPage.vue';
 import EditorPage from '../views/EditorPage.vue';
