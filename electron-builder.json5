@@ -4,7 +4,7 @@
 {
   appId: 'NodeFlow',
   asar: true,
-  icon: 'public/favicon.ico',
+  icon: 'favicon.ico',
   directories: {
     output: 'release/${version}',
   },
@@ -25,7 +25,7 @@
   linux: {
     target: ['AppImage'],
     category: 'Development',
-    icon: 'public/icon.png'
+    icon: 'icon.png'
   },
   nsis: {
     oneClick: false,
