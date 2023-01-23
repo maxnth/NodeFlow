@@ -2,9 +2,10 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  appId: 'NodeFlow',
+  productName: 'NodeFlow',
+  appId: 'com.github.maxnth.NodeFlow',
   asar: true,
-  icon: 'favicon.ico',
+  icon: 'public/icon.png',
   directories: {
     output: 'release/${version}',
   },
@@ -12,6 +13,7 @@
   mac: {
     artifactName: '${productName}_${version}.${ext}',
     target: ['dmg'],
+    icon: 'public/icon.png'
   },
   win: {
     target: [
@@ -20,12 +22,13 @@
         arch: ['x64'],
       },
     ],
+    icon: 'public/favicon.ico',
     artifactName: '${productName}_${version}.${ext}',
   },
   linux: {
     target: ['AppImage'],
-    category: 'Development',
-    icon: 'icon.png'
+    category: 'Productivity',
+    icon: 'public/icon.png'
   },
   nsis: {
     oneClick: false,
