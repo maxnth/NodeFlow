@@ -31,7 +31,6 @@ const items = ref([
     <SpeedDial
       :model="items"
       :radius="120"
-      buttonClass="p-button-custom"
       direction="up-left"
       type="quarter-circle"
       :tooltipOptions="{ position: 'left' }"
@@ -40,7 +39,7 @@ const items = ref([
 </template>
 
 <style>
-.p-button-custom {
-  @apply bg-blue-800 dark:bg-blue-600;
+.p-button{
+  @apply bg-blue-600 dark:bg-blue-800 !important
 }
 </style>
