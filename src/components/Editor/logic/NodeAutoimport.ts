@@ -119,11 +119,11 @@ export function autoimportNodes(editor: any) {
     OcrdPreprocessImageNode,
     'Image Enhancement'
   );
-  editor.registerNodeType(
-    'ocrd-skimage-denoise-raw',
-    OcrdSkimageDenoiseRawNode,
-    'Image Enhancement'
-  );
+  // editor.registerNodeType(
+  //   'ocrd-skimage-denoise-raw',
+  //   OcrdSkimageDenoiseRawNode,
+  //   'Image Enhancement'
+  // );
   editor.registerNodeType(
     'ocrd-skimage-normalize',
     OcrdSkimageNormalizeNode,
@@ -179,12 +179,12 @@ export function autoimportNodes(editor: any) {
     OcrdCisOcropyClipNode,
     ' Clipping'
   );
-  editor.registerNodeType('ocrd-cis-align', OcrdCisAlignNode, 'Text alignment');
-  editor.registerNodeType(
-    'ocrd-cor-asv-ann-align',
-    OcrdCorAsvAnnAlignNode,
-    'Text alignment'
-  );
+  // editor.registerNodeType('ocrd-cis-align', OcrdCisAlignNode, 'Text alignment');
+  // editor.registerNodeType(
+  //   'ocrd-cor-asv-ann-align',
+  //   OcrdCorAsvAnnAlignNode,
+  //   'Text alignment'
+  // );
   editor.registerNodeType(
     'ocrd-typegroups-classifier',
     OcrdTypegroupsClassifierNode,
@@ -210,80 +210,80 @@ export function autoimportNodes(editor: any) {
     OcrdSegmentRepairNode,
     'Resegmentation'
   );
-  editor.registerNodeType(
-    'ocrd-anybaseocr-block-segmentation',
-    OcrdAnybaseocrBlockSegmentationNode,
-    'Layout Analysis (Block)'
-  );
-  editor.registerNodeType(
-    'ocrd-anybaseocr-layout-analysis',
-    OcrdAnybaseocrLayoutAnalysisNode,
-    'Layout Analysis'
-  );
-  editor.registerNodeType(
-    'ocrd-anybaseocr-textline',
-    OcrdAnybaseocrTextlineNode,
-    'Layout Analysis (Lines)'
-  );
-  editor.registerNodeType(
-    'ocrd-anybaseocr-tiseg',
-    OcrdAnybaseocrTisegNode,
-    'Layout Analysis (Full)'
-  );
+  // editor.registerNodeType(
+  //   'ocrd-anybaseocr-block-segmentation',
+  //   OcrdAnybaseocrBlockSegmentationNode,
+  //   'Layout Analysis (Block)'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-anybaseocr-layout-analysis',
+  //   OcrdAnybaseocrLayoutAnalysisNode,
+  //   'Layout Analysis'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-anybaseocr-textline',
+  //   OcrdAnybaseocrTextlineNode,
+  //   'Layout Analysis (Lines)'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-anybaseocr-tiseg',
+  //   OcrdAnybaseocrTisegNode,
+  //   'Layout Analysis (Full)'
+  // );
   editor.registerNodeType(
     'ocrd-tesserocr-segment',
     OcrdTesserocrSegmentNode,
-    'Layout Analysis (Full)'
+    'Layout Analysis'
   );
-  editor.registerNodeType(
-    'ocrd-tesserocr-segment-line',
-    OcrdTesserocrSegmentLineNode,
-    'Layout Analysis (Line)'
-  );
-  editor.registerNodeType(
-    'ocrd-tesserocr-segment-region',
-    OcrdTesserocrSegmentRegionNode,
-    'Layout Analysis (Region)'
-  );
-  editor.registerNodeType(
-    'ocrd-tesserocr-segment-table',
-    OcrdTesserocrSegmentTableNode,
-    'Layout Analysis (Table)'
-  );
-  editor.registerNodeType(
-    'ocrd-tesserocr-segment-word',
-    OcrdTesserocrSegmentWordNode,
-    'Layout Analysis (Word)'
-  );
+  // editor.registerNodeType(
+  //   'ocrd-tesserocr-segment-line',
+  //   OcrdTesserocrSegmentLineNode,
+  //   'Layout Analysis (Line)'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-tesserocr-segment-region',
+  //   OcrdTesserocrSegmentRegionNode,
+  //   'Layout Analysis (Region)'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-tesserocr-segment-table',
+  //   OcrdTesserocrSegmentTableNode,
+  //   'Layout Analysis (Table)'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-tesserocr-segment-word',
+  //   OcrdTesserocrSegmentWordNode,
+  //   'Layout Analysis (Word)'
+  // );
   editor.registerNodeType(
     'ocrd-cis-ocropy-segment',
     OcrdCisOcropySegmentNode,
-    'Layout Analysis (Full)'
+    'Layout Analysis'
   );
   editor.registerNodeType(
     'ocrd-detectron2-segment',
     OcrdDetectron2SegmentNode,
-    'Layout Analysis (Full)'
+    'Layout Analysis'
   );
   editor.registerNodeType(
     'ocrd-eynollah-segment',
     OcrdEynollahSegmentNode,
-    'Layout Analysis (Full)'
+    'Layout Analysis'
   );
   editor.registerNodeType(
     'ocrd-kraken-segment',
     OcrdKrakenSegmentNode,
-    'Layout Analysis (Full)'
+    'Layout Analysis'
   );
-  editor.registerNodeType(
-    'ocrd-pc-segmentation',
-    OcrdPcSegmentationNode,
-    'Layout Analysis (Full)'
-  );
+  // editor.registerNodeType(
+  //   'ocrd-pc-segmentation',
+  //   OcrdPcSegmentationNode,
+  //   'Layout Analysis (Full)'
+  // );
   editor.registerNodeType(
     'ocrd-sbb-textline-detector',
     OcrdSbbTextlineDetectorNode,
-    'Layout Analysis (Line)'
+    'Line Segmentation'
   );
   editor.registerNodeType(
     'ocrd-calamari-recognize',
@@ -298,7 +298,7 @@ export function autoimportNodes(editor: any) {
   editor.registerNodeType(
     'ocrd-cor-asv-ann-evaluate',
     OcrdCorAsvAnnEvaluateNode,
-    'OCR Evaluation'
+    'Evaluation'
   );
   editor.registerNodeType(
     'ocrd-cor-asv-ann-process',
@@ -313,7 +313,7 @@ export function autoimportNodes(editor: any) {
   editor.registerNodeType(
     'ocrd-dinglehopper',
     OcrdDinglehopperNode,
-    'OCR Evaluation'
+    'Evaluation'
   );
   editor.registerNodeType(
     'ocrd-ocropy-segment',
@@ -323,7 +323,7 @@ export function autoimportNodes(editor: any) {
   editor.registerNodeType(
     'ocrd-segment-evaluate',
     OcrdSegmentEvaluateNode,
-    'Layout Evaluation'
+    'Evaluation'
   );
   editor.registerNodeType(
     'ocrd-tesserocr-recognize',
@@ -335,91 +335,91 @@ export function autoimportNodes(editor: any) {
     OcrdTesserocrFontshapeNode,
     'Font style annotation'
   );
-  editor.registerNodeType(
-    'ocrd-cis-ocropy-train',
-    OcrdCisOcropyTrainNode,
-    'Text recognition and optimization'
-  );
-  editor.registerNodeType(
-    'ocrd-cor-asv-ann-join',
-    OcrdCorAsvAnnJoinNode,
-    'Text recognition and optimization'
-  );
-  editor.registerNodeType(
-    'ocrd-cor-asv-ann-mark',
-    OcrdCorAsvAnnMarkNode,
-    'Text recognition and optimization'
-  );
-  editor.registerNodeType(
-    'ocrd-keraslm-rate',
-    OcrdKeraslmRateNode,
-    'Text recognition and optimization'
-  );
-  editor.registerNodeType(
-    'ocrd-kraken-recognize',
-    OcrdKrakenRecognizeNode,
-    'Text recognition and optimization'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-replace-text',
-    OcrdSegmentReplaceTextNode,
-    'Text recognition and optimization'
-  );
-  editor.registerNodeType(
-    'ocrd-cis-ocropy-rec',
-    OcrdCisOcropyRecNode,
-    'Text recognition and optimization'
-  );
+  // editor.registerNodeType(
+  //   'ocrd-cis-ocropy-train',
+  //   OcrdCisOcropyTrainNode,
+  //   'Text recognition and optimization'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-cor-asv-ann-join',
+  //   OcrdCorAsvAnnJoinNode,
+  //   'Text recognition and optimization'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-cor-asv-ann-mark',
+  //   OcrdCorAsvAnnMarkNode,
+  //   'Text recognition and optimization'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-keraslm-rate',
+  //   OcrdKeraslmRateNode,
+  //   'Text recognition and optimization'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-kraken-recognize',
+  //   OcrdKrakenRecognizeNode,
+  //   'Text recognition and optimization'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-replace-text',
+  //   OcrdSegmentReplaceTextNode,
+  //   'Text recognition and optimization'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-cis-ocropy-rec',
+  //   OcrdCisOcropyRecNode,
+  //   'Text recognition and optimization'
+  // );
   editor.registerNodeType(
     'ocrd-cis-ocropy-recognize',
     OcrdCisOcropyRecognizeNode,
     'Text recognition and optimization'
   );
-  editor.registerNodeType(
-    'ocrd-segment-replace-original',
-    OcrdSegmentReplaceOriginalNode,
-    'Adaptation of Coordinates'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-replace-page',
-    OcrdSegmentReplacePageNode,
-    'Adaptation of Coordinates'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-extract-glyphs',
-    OcrdSegmentExtractGlyphsNode,
-    'Format Conversion'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-extract-lines',
-    OcrdSegmentExtractLinesNode,
-    'Format Conversion'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-extract-pages',
-    OcrdSegmentExtractPagesNode,
-    'Format Conversion'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-extract-regions',
-    OcrdSegmentExtractRegionsNode,
-    'Format Conversion'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-extract-words',
-    OcrdSegmentExtractWordsNode,
-    'Format Conversion'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-from-coco',
-    OcrdSegmentFromCocoNode,
-    'Format Conversion'
-  );
-  editor.registerNodeType(
-    'ocrd-segment-from-masks',
-    OcrdSegmentFromMasksNode,
-    'Format Conversion'
-  );
+  // editor.registerNodeType(
+  //   'ocrd-segment-replace-original',
+  //   OcrdSegmentReplaceOriginalNode,
+  //   'Adaptation of Coordinates'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-replace-page',
+  //   OcrdSegmentReplacePageNode,
+  //   'Adaptation of Coordinates'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-extract-glyphs',
+  //   OcrdSegmentExtractGlyphsNode,
+  //   'Format Conversion'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-extract-lines',
+  //   OcrdSegmentExtractLinesNode,
+  //   'Format Conversion'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-extract-pages',
+  //   OcrdSegmentExtractPagesNode,
+  //   'Format Conversion'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-extract-regions',
+  //   OcrdSegmentExtractRegionsNode,
+  //   'Format Conversion'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-extract-words',
+  //   OcrdSegmentExtractWordsNode,
+  //   'Format Conversion'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-from-coco',
+  //   OcrdSegmentFromCocoNode,
+  //   'Format Conversion'
+  // );
+  // editor.registerNodeType(
+  //   'ocrd-segment-from-masks',
+  //   OcrdSegmentFromMasksNode,
+  //   'Format Conversion'
+  // );
   editor.registerNodeType(
     'ocrd-page2tei',
     OcrdPage2teiNode,
