@@ -1,5 +1,7 @@
 # NodeFlow
 
+A multi-platform Desktop application for interactively constructing simple and complex OCR workflows
+
 ## Getting Started
 
 ### 1. Install packages
