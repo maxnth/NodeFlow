@@ -14,6 +14,7 @@ import SidebarDescriptionOption from '~/components/Editor/Custom/SidebarDescript
 
 // TODO: still uses options API as baklavajs v1.x is buggy with the composition API. Should be migrated when baklavajs v2.x is stable
 export default {
+  // eslint-disable-next-line vue/no-unused-components
   components: { HintOverlay, EditorMenubar },
   data() {
     return {
@@ -31,7 +32,7 @@ export default {
     this.editor.use(new OptionPlugin());
     // The engine plugin calculates the nodes in the graph in the
     // correct order using the "calculate" methods of the nodes
-    this.editor.use(this.engine);
+    // this.editor.use(this.engine);
 
     // Show a minimap in the top right corner
     this.viewPlugin.enableMinimap = true;
