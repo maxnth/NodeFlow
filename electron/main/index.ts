@@ -58,7 +58,7 @@ async function createWindow() {
 
   win.setMenu(null);
 
-  win.setOpacity(0.98);
+  win.setOpacity(1);
 
   if (process.env.VITE_DEV_SERVER_URL) {
     // electron-vite-vue#298
