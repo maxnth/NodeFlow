@@ -1,4 +1,4 @@
-# NodeFlow
+# <img src="public/icon.svg" width="30" height="30"> NodeFlow
 
 A multi-platform Desktop application for interactively constructing simple and complex OCR workflows
 
