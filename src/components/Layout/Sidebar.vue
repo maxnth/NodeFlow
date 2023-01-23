@@ -123,9 +123,9 @@ const { t } = useI18n();
           />
         </button>
       </div>
-      <div class="language-container">
-        <LanguageDropdown />
-      </div>
+<!--      <div class="language-container">-->
+<!--        <LanguageDropdown />-->
+<!--      </div>-->
     </div>
   </div>
 </template>
