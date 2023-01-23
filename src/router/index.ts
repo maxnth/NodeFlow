@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router';
+import {createRouter, RouteRecordRaw, createWebHashHistory} from 'vue-router';
 
 import DashboardPage from '../views/DashboardPage.vue';
 import EditorPage from '../views/EditorPage.vue';
@@ -33,7 +33,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
