@@ -7,9 +7,10 @@ import { ViewPlugin } from '@baklavajs/plugin-renderer-vue3';
 import { OptionPlugin } from '@baklavajs/plugin-options-vue3';
 import { Engine } from '@baklavajs/plugin-engine';
 
-import { InputNode } from './ProcessorNodes/InputNode';
+import { InputNode } from '../../nodes/InputNode';
 
 import { autoimportNodes } from './logic/NodeAutoimport';
+import SidebarDescriptionOption from '~/components/Editor/Custom/SidebarDescriptionOption.vue';
 
 // TODO: still uses options API as baklavajs v1.x is buggy with the composition API. Should be migrated when baklavajs v2.x is stable
 export default {
@@ -38,6 +39,11 @@ export default {
     // register the nodes we have defined, so they can be
     // added by the user as well as saved & loaded.
     this.editor.registerNodeType('InputNode', InputNode);
+
+    this.viewPlugin.registerOption(
+      'SidebarDescriptionOption',
+      SidebarDescriptionOption
+    );
 
     // NODES
     autoimportNodes(this.editor);
@@ -82,7 +88,7 @@ export default {
 <template>
   <!--  <EditorMenubar />-->
   <HintOverlay @upload="upload" @download="download" @clear="clear" />
-  <baklava-editor :plugin="viewPlugin" />
+  <baklava-editor id="editor" :plugin="viewPlugin" />
 </template>
 
 <style scoped></style>

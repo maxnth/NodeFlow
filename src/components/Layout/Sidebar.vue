@@ -24,7 +24,7 @@ const { t } = useI18n();
     <div>
       <a class="mb-5 flex items-center pl-2.5">
         <img
-          src="public/icon.svg"
+          src="/public/icon.svg"
           class="mr-3 h-6 sm:h-7"
           alt="NodeFlow Logo"
         />
@@ -42,7 +42,7 @@ const { t } = useI18n();
             <HomeIcon
               class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
             />
-            <span class="ml-3">Dashboard</span>
+            <span class="ml-3 truncate">Dashboard</span>
           </router-link>
         </li>
         <li>
@@ -53,7 +53,7 @@ const { t } = useI18n();
             <CubeTransparentIcon
               class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
             />
-            <span class="ml-3 flex-1 whitespace-nowrap">Workflow Editor</span>
+            <span class="ml-3 truncate">Workflow Editor</span>
           </router-link>
         </li>
         <li>
@@ -64,13 +64,13 @@ const { t } = useI18n();
             <PresentationChartLineIcon
               class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
             />
-            <span class="ml-3 flex-1 whitespace-nowrap">Tour</span>
+            <span class="ml-3 truncate">Tour</span>
           </router-link>
         </li>
       </ul>
       <div
         id="dropdown-cta"
-        class="mt-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900"
+        class="invisible mt-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900 md:visible"
         role="alert"
         v-show="!ctaHidden"
       >

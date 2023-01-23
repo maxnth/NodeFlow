@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 const t = useI18n({ useScope: 'global' });
 
 const selectedLanguage = ref(t.locale.value);
@@ -7,9 +7,8 @@ const languages = ref([
   { name: '🇩🇪 German', flag: '🇩🇪', code: 'de' },
 ]);
 
-function changeLocale(event: Event) {
+function changeLocale(event) {
   t.locale.value = event.value;
-  console.log(t.locale.value);
 }
 </script>
 
