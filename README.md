@@ -2,6 +2,10 @@
 
 A multi-platform Desktop application for interactively constructing simple and complex OCR workflows
 
+| WARNING: This is still a very early proof of concept with major missing features and possibly severe bugs! |
+|------------------------------------------------------------------------------------------------------------|
+
+
 ## Getting Started
 
 ### 1. Install packages
