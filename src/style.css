@@ -17,13 +17,13 @@
 }
 
 ::-webkit-scrollbar {
-  background-color: #2B2B2B;
-  border-left: 1px solid #3E3E3E;
-  width: .65rem;
+  background-color: #2b2b2b;
+  border-left: 1px solid #3e3e3e;
+  width: 0.65rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  background:  #6B6B6B;
+  background: #6b6b6b;
   border-radius: 10px;
 }
 
@@ -31,7 +31,7 @@
   @apply bg-gray-200 dark:bg-gray-700;
 }
 
-.minimap{
+.minimap {
   height: auto !important;
   width: auto !important;
 }

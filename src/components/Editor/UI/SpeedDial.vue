@@ -1,29 +1,29 @@
 <script setup>
-const emit= defineEmits(["upload", "download", "clear"])
+const emit = defineEmits(['upload', 'download', 'clear']);
 
 const items = ref([
-    {
-      label: 'Upload',
-      icon: 'pi pi-upload',
-      command: () => {
-        emit("upload")
-      }
+  {
+    label: 'Upload',
+    icon: 'pi pi-upload',
+    command: () => {
+      emit('upload');
     },
-    {
-      label: 'Download',
-      icon: 'pi pi-download',
-      command: () => {
-        emit("download")
-      }
+  },
+  {
+    label: 'Download',
+    icon: 'pi pi-download',
+    command: () => {
+      emit('download');
     },
-    {
-      label: 'Clear Workflow',
-      icon: 'pi pi-trash',
-      command: () => {
-        emit("clear")
-      }
+  },
+  {
+    label: 'Clear Workflow',
+    icon: 'pi pi-trash',
+    command: () => {
+      emit('clear');
     },
-  ])
+  },
+]);
 </script>
 
 <template>
@@ -34,12 +34,13 @@ const items = ref([
       buttonClass="p-button-custom"
       direction="up-left"
       type="quarter-circle"
-      :tooltipOptions="{position: 'left'}"/>
+      :tooltipOptions="{ position: 'left' }"
+    />
   </div>
 </template>
 
 <style>
-.p-button-custom{
-  @apply bg-blue-800 dark:bg-blue-600
+.p-button-custom {
+  @apply bg-blue-800 dark:bg-blue-600;
 }
 </style>

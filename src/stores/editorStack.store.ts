@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia';
 
-export const useCounterStore = defineStore('counter', () => {
+export const useEditorStackStore = defineStore('editorStack', () => {
   const count = ref(0);
 
   function increment() {
@@ -14,4 +14,4 @@ export const useCounterStore = defineStore('counter', () => {
 });
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useCounterStore, import.meta.hot));
+  import.meta.hot.accept(acceptHMRUpdate(useEditorStackStore, import.meta.hot));

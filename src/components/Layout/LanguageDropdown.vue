@@ -1,19 +1,30 @@
 <script setup lang="ts">
+const t = useI18n({ useScope: 'global' });
 
-
-const selectedLanguage = ref("en")
+const selectedLanguage = ref(t.locale.value);
 const languages = ref([
-  {"name": "🇺🇸 English", "flag": "🇺🇸", code: "en"},
-  {"name": "🇩🇪 German", "flag": "🇩🇪", code: "de"}
-])
+  { name: '🇺🇸 English', flag: '🇺🇸', code: 'en' },
+  { name: '🇩🇪 German', flag: '🇩🇪', code: 'de' },
+]);
+
+function changeLocale(event: Event) {
+  t.locale.value = event.value;
+  console.log(t.locale.value);
+}
 </script>
 
 <template>
-  <Dropdown v-model="selectedLanguage" :options="languages" optionLabel="flag" optionValue="code" />
+  <Dropdown
+    v-model="selectedLanguage"
+    :options="languages"
+    optionLabel="flag"
+    optionValue="code"
+    @change="changeLocale($event)"
+  />
 </template>
 
 <style scoped>
-.p-dropdown{
+.p-dropdown {
   background: transparent;
   border: 0;
 }

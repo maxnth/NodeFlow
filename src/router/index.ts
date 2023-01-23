@@ -1,9 +1,9 @@
 import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router';
 
-import DashboardPage from "../views/DashboardPage.vue";
+import DashboardPage from '../views/DashboardPage.vue';
 import EditorPage from '../views/EditorPage.vue';
-import TourPage from "../views/TourPage.vue";
-import NotFound from "../components/Layout/NotFound.vue";
+import TourPage from '../views/TourPage.vue';
+import NotFound from '../components/Layout/NotFound.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -22,12 +22,14 @@ const routes: RouteRecordRaw[] = [
     component: TourPage,
   },
   {
-    path: '/404', name: 'NotFound', component: NotFound
+    path: '/404',
+    name: 'NotFound',
+    component: NotFound,
   },
   {
-    path: '/:catchAll(.*)', redirect:'404'
-  }
-
+    path: '/:catchAll(.*)',
+    redirect: '404',
+  },
 ];
 
 const router = createRouter({

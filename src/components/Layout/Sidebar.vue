@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import LanguageDropdown from "./LanguageDropdown.vue";
+import LanguageDropdown from './LanguageDropdown.vue';
 
-import { HomeIcon, CubeTransparentIcon, PresentationChartLineIcon, MoonIcon, SunIcon } from '@heroicons/vue/24/solid'
+import {
+  HomeIcon,
+  CubeTransparentIcon,
+  PresentationChartLineIcon,
+  MoonIcon,
+  SunIcon,
+} from '@heroicons/vue/24/solid';
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
-const ctaHidden = ref(false)
+const ctaHidden = ref(false);
 
 const { t } = useI18n();
 </script>
@@ -33,7 +39,9 @@ const { t } = useI18n();
             to="/"
             class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
           >
-            <HomeIcon class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+            <HomeIcon
+              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            />
             <span class="ml-3">Dashboard</span>
           </router-link>
         </li>
@@ -42,7 +50,9 @@ const { t } = useI18n();
             to="/editor"
             class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
           >
-            <CubeTransparentIcon class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+            <CubeTransparentIcon
+              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            />
             <span class="ml-3 flex-1 whitespace-nowrap">Workflow Editor</span>
           </router-link>
         </li>
@@ -51,7 +61,9 @@ const { t } = useI18n();
             to="/tour"
             class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
           >
-            <PresentationChartLineIcon class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+            <PresentationChartLineIcon
+              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            />
             <span class="ml-3 flex-1 whitespace-nowrap">Tour</span>
           </router-link>
         </li>
@@ -65,7 +77,7 @@ const { t } = useI18n();
         <div class="mb-3 flex items-center">
           <span
             class="mr-2 rounded bg-orange-100 px-2.5 py-0.5 text-sm font-semibold text-orange-800 dark:bg-orange-200 dark:text-orange-900"
-            >{{ $t("sidebar.cta.heading") }}</span
+            >{{ $t('sidebar.cta.heading') }}</span
           >
           <button
             type="button"
@@ -88,25 +100,31 @@ const { t } = useI18n();
             </svg>
           </button>
         </div>
-        <p class="mb-3 text-sm text-blue-900 dark:text-blue-400">{{ $t("sidebar.cta.content") }}</p>
+        <p class="mb-3 text-sm text-blue-900 dark:text-blue-400">
+          {{ $t('sidebar.cta.content') }}
+        </p>
       </div>
     </div>
 
-    <div class="flex justify-between pl-2.5 pr-2.5 pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+    <div
+      class="mt-4 flex justify-between border-t border-gray-200 pl-2.5 pr-2.5 pt-4 dark:border-gray-700"
+    >
       <div class="dark-toggle-container">
-      <button class="text-center" @click="toggleDark()">
-        <MoonIcon
-          v-if="isDark"
-          aria-hidden="true"
-          class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"/>
-        <SunIcon
-          v-else
-          aria-hidden="true"
-          class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
-      </button>
+        <button class="text-center" @click="toggleDark()">
+          <MoonIcon
+            v-if="isDark"
+            aria-hidden="true"
+            class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+          />
+          <SunIcon
+            v-else
+            aria-hidden="true"
+            class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+          />
+        </button>
       </div>
       <div class="language-container">
-        <LanguageDropdown/>
+        <LanguageDropdown />
       </div>
     </div>
   </div>

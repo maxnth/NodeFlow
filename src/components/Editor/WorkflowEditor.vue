@@ -1,5 +1,6 @@
 <script>
 import HintOverlay from './UI/SpeedDial.vue';
+import EditorMenubar from './UI/EditorMenubar.vue';
 
 import { Editor } from '@baklavajs/core';
 import { ViewPlugin } from '@baklavajs/plugin-renderer-vue3';
@@ -12,7 +13,7 @@ import { autoimportNodes } from './logic/NodeAutoimport';
 
 // TODO: still uses options API as baklavajs v1.x is buggy with the composition API. Should be migrated when baklavajs v2.x is stable
 export default {
-  components: { HintOverlay },
+  components: { HintOverlay, EditorMenubar },
   data() {
     return {
       editor: new Editor(),
@@ -54,11 +55,11 @@ export default {
       n.position.y = y;
       return n;
     },
-    upload(state){
+    upload(state) {
       // TODO: Implement loading from file
-      this.editor.load(state)
+      this.editor.load(state);
     },
-    download(){
+    download() {
       // TODO: Implement saving current editor state to file
       console.log(this.editor.save());
     },
@@ -67,18 +68,19 @@ export default {
       try {
         while (this.editor.nodes.length > 0) {
           for (const node of this.editor.nodes) {
-            this.editor.removeNode(node)
+            this.editor.removeNode(node);
           }
         }
       } catch (error) {
-        console.log("Something went wrong")
+        console.log('Something went wrong');
       }
-    }
+    },
   },
 };
 </script>
 
 <template>
+  <!--  <EditorMenubar />-->
   <HintOverlay @upload="upload" @download="download" @clear="clear" />
   <baklava-editor :plugin="viewPlugin" />
 </template>

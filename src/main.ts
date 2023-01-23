@@ -11,11 +11,13 @@ import { BaklavaVuePlugin } from '@baklavajs/plugin-renderer-vue3';
 import '@baklavajs/plugin-renderer-vue3/dist/styles.css';
 
 import PrimeVue from 'primevue/config';
-import "primevue/resources/primevue.min.css";
-import "primevue/resources/themes/tailwind-light/theme.css";
-import 'primeicons/primeicons.css'
-import SpeedDial from "primevue/speeddial";
-import Dropdown from "primevue/dropdown";
+import 'primevue/resources/primevue.min.css';
+import 'primevue/resources/themes/tailwind-light/theme.css';
+import 'primeicons/primeicons.css';
+import SpeedDial from 'primevue/speeddial';
+import Dropdown from 'primevue/dropdown';
+
+import Menubar from 'primevue/menubar';
 
 import './style.css';
 
@@ -32,23 +34,25 @@ const messages = Object.fromEntries(
   })
 );
 
-app.use(
-  createI18n({
-    legacy: false,
-    locale: 'en',
-    fallbackLocale: 'en',
-    warnHtmlMessage: false,
-    messages,
-  })
-);
+const i18n = createI18n({
+  legacy: false,
+  locale: 'en',
+  fallbackLocale: 'en',
+  warnHtmlMessage: false,
+  globalInjection: true,
+  messages,
+});
+
+app.use(i18n);
 app.use(createPinia());
 app.use(router);
 app.use(BaklavaVuePlugin);
-app.use(PrimeVue)
+app.use(PrimeVue);
 
 // PrimeVue components
-app.component("SpeedDial", SpeedDial)
-app.component("Dropdown", Dropdown)
+app.component('SpeedDial', SpeedDial);
+app.component('Dropdown', Dropdown);
+app.component('Menubar', Menubar);
 
 app.mount('#app').$nextTick(() => {
   postMessage({ payload: 'removeLoading' }, '*');

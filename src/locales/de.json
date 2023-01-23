@@ -1,14 +1,31 @@
 {
-  "common": {
-    "light": "",
-    "dark": "",
-    "theme": "",
-    "language": ""
-  },
   "sidebar": {
     "cta": {
       "heading": "Alpha release",
       "content": "Diese Version von NodeFLow ist noch eine frühe Alpha-Version und kann noch schwerwiegende Fehler und fehlende Features beinhalten."
+    }
+  },
+  "dashboard": {
+    "heading": {
+      "welcome": "Willkommen bei",
+      "tool-name": "NodeFlow"
+    },
+    "cta": {
+      "create": {
+        "heading": "Erstellen",
+        "content": "Benutze den Workflow Editor um einen neuen OCR-Workflow zu erstellen",
+        "button": "Editor öffnen"
+      },
+      "edit": {
+        "heading": "Bearbeiten",
+        "content": "Lade einen existierenden Workflow hoch und bearbeite ihn",
+        "button": "Upload starten"
+      },
+      "tour": {
+        "heading": "Tour",
+        "content": "Nimm an einer Tour durch den NodeFlow-Editor teil",
+        "button": "Tour starten"
+      }
     }
   },
   "404": {
