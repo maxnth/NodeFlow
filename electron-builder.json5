@@ -23,8 +23,9 @@
     artifactName: '${productName}_${version}.${ext}',
   },
   linux: {
-    target: ['deb', 'rpm', 'AppImage'],
+    target: ['AppImage'],
     category: 'Development',
+    icon: 'public/icon.png'
   },
   nsis: {
     oneClick: false,
