@@ -1,6 +1,6 @@
 name: Release
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       dry-run:
         description: 'Compiles the app but not upload artifacts to distribution server'
