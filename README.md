@@ -9,6 +9,8 @@ NodeFlow is an open‑source, multi-platform desktop application for creating an
 | WARNING: This is still a very early proof of concept with major missing features and possibly severe bugs! |
 |------------------------------------------------------------------------------------------------------------|
 
+<img src="public/images/repository/product_image.jpg">
+
 # Features
 
 NodeFlow provides the following features:
