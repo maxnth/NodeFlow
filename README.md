@@ -1,6 +1,6 @@
 <p align="center">
-<img width="500" src="public/images/repository/logo_with_text_light_mode.svg#gh-light-mode-only">
-<img width="500" src="public/images/repository/logo_with_text_dark_mode.svg#gh-dark-mode-only">
+<img width="400" src="public/images/repository/logo_with_text_light_mode.svg#gh-light-mode-only">
+<img width="400" src="public/images/repository/logo_with_text_dark_mode.svg#gh-dark-mode-only">
 </p>
 
 NodeFlow is an open‑source, multi-platform desktop application for creating and managing OCR workflows. It allows beginner and advanced users to interactively craft everything from basic linear to complex branched workflows and export them for command line usage or for the usage in other applications like [OCR4all](https://github.com/OCR4all/OCR4all).
