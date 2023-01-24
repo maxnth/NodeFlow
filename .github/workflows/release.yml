@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: 16
           cache: 'yarn'
-
+      - run: yarn
       - run: yarn build
 
       - name: Compile artifacts ${{ inputs.dry-run && '' || 'and upload them to github release' }}
