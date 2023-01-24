@@ -1,5 +1,6 @@
 <script>
-import HintOverlay from './UI/SpeedDial.vue';
+import SpeedDial from './UI/SpeedDial.vue';
+import HintOverlay from './UI/HintOverlay.vue';
 import EditorMenubar from './UI/EditorMenubar.vue';
 
 import { Editor } from '@baklavajs/core';
@@ -15,7 +16,7 @@ import SidebarDescriptionOption from '~/components/Editor/Custom/SidebarDescript
 // TODO: still uses options API as baklavajs v1.x is buggy with the composition API. Should be migrated when baklavajs v2.x is stable
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { HintOverlay, EditorMenubar },
+  components: { HintOverlay, EditorMenubar, SpeedDial },
   data() {
     return {
       editor: new Editor(),
@@ -87,8 +88,8 @@ export default {
 </script>
 
 <template>
-  <!--  <EditorMenubar />-->
-  <HintOverlay @upload="upload" @download="download" @clear="clear" />
+  <HintOverlay />
+  <SpeedDial @upload="upload" @download="download" @clear="clear" />
   <baklava-editor id="editor" :plugin="viewPlugin" />
 </template>
 
