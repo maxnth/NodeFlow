@@ -36,10 +36,6 @@ jobs:
           node-version: 16
           cache: 'yarn'
 
-      - run: npm ci
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-
       - run: yarn build
 
       - name: Compile artifacts ${{ inputs.dry-run && '' || 'and upload them to github release' }}
