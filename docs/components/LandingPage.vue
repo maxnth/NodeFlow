@@ -59,7 +59,7 @@
         <div class="w-full overflow-hidden p-12 xl:w-3/5">
           <img
             class="mx-auto w-full -rotate-6 transform transition duration-700 ease-in-out hover:rotate-6 hover:scale-105 md:w-4/5"
-            src="~/assets/images/placeholderApp.svg"
+            src="~/assets/images/app.png"
           />
         </div>
 
