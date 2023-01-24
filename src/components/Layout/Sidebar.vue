@@ -24,7 +24,7 @@ const { t } = useI18n();
     <div>
       <a class="mb-5 flex items-center pl-2.5">
         <img
-          src="/public/icon.svg"
+          src="/public/images/application/icon.svg"
           class="mr-3 h-6 sm:h-7"
           alt="NodeFlow Logo"
         />
