@@ -71,6 +71,7 @@ export default {
     async download() {
       // TODO: Implement saving current editor state to file correctly
       ipcRenderer.send("save-file", JSON.stringify(this.editor.save()))
+      this.$toast.add({ severity: 'success', summary: 'Success', detail: 'Downloaded to Desktop', life: 1500 });
     },
     clear() {
       // TODO: Find out why one can't just iterate once to remove all nodes

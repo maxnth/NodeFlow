@@ -1,12 +1,17 @@
 <script setup>
+import { useToast } from "primevue/usetoast";
+const toast = useToast();
+
 const emit = defineEmits(['upload', 'download', 'clear']);
+
 
 const items = ref([
   {
     label: 'Upload',
     icon: 'pi pi-upload',
     command: () => {
-      emit('upload');
+      // emit('upload');
+      toast.add({ severity: 'info', summary: 'Info', detail: 'Currently not implemented', life: 1500 });
     },
   },
   {

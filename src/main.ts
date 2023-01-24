@@ -19,6 +19,7 @@ import Dropdown from 'primevue/dropdown';
 
 
 import Menubar from 'primevue/menubar';
+import ToastService from 'primevue/toastservice';
 
 // @ts-ignore
 import VueShepherd from 'vue-shepherd';
@@ -53,6 +54,7 @@ app.use(createPinia());
 app.use(router);
 app.use(BaklavaVuePlugin);
 app.use(PrimeVue);
+app.use(ToastService);
 app.use(VueShepherd);
 
 // PrimeVue components
