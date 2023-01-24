@@ -11,7 +11,7 @@ NodeFlow is an open‑source, multi-platform desktop application for creating an
 
 <img src="public/images/repository/product_image.jpg">
 
-# Features
+# (Planned) Features
 
 NodeFlow provides the following features:
 
