@@ -21,7 +21,7 @@
           <div class="mt-5 flex w-1/2 content-center justify-end">
             <a
               class="hover:text-underline inline-block h-10 transform p-2 text-center text-blue-300 no-underline duration-300 ease-in-out hover:scale-125 hover:text-pink-500 md:h-auto md:p-4"
-              href="https://twitter.com/intent/tweet?url=#"
+              href="https://github.com/maxnth/NodeFlow"
             >
               <Icon name="uil:github" />
             </a>
@@ -72,7 +72,7 @@
           >
             <div class="grid grid-flow-row-dense grid-cols-3 gap-4">
               <a
-                href="#"
+                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.1-alpha/NodeFlow_0.0.1.dmg"
                 class="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
               >
                 <Icon class="mr-5 text-white" name="simple-icons:apple" />
@@ -82,7 +82,7 @@
                 </div>
               </a>
               <a
-                href="#"
+                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.1-alpha/NodeFlow-0.0.1.AppImage"
                 class="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
               >
                 <Icon class="mr-5 text-white" name="simple-icons:linux" />
@@ -92,7 +92,7 @@
                 </div>
               </a>
               <a
-                href="#"
+                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.1-alpha/NodeFlow_0.0.1.msi"
                 class="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
               >
                 <Icon class="mr-5 text-white" name="simple-icons:windows" />
