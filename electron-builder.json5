@@ -5,7 +5,7 @@
   productName: 'NodeFlow',
   appId: 'com.github.maxnth.NodeFlow',
   asar: true,
-  icon: 'public/icon.png',
+  icon: 'public/images/application/icon.png',
   directories: {
     output: 'release/${version}',
   },
@@ -13,7 +13,7 @@
   mac: {
     artifactName: '${productName}_${version}.${ext}',
     target: ['dmg'],
-    icon: 'public/icon.png',
+    icon: 'public/images/application/icon.png',
   },
   win: {
     target: [
@@ -22,13 +22,14 @@
         arch: ['x64'],
       },
     ],
-    icon: 'public/favicon.ico',
+    icon: 'public/images/application/favicon.ico',
+    publisherName: "Maximilian Nöth",
     artifactName: '${productName}_${version}.${ext}',
   },
   linux: {
     target: ['AppImage'],
     category: 'Productivity',
-    icon: 'public/icon.png',
+    icon: 'public/images/application/icon.png',
   },
   nsis: {
     oneClick: false,
