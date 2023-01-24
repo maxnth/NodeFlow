@@ -2,6 +2,9 @@
 // @ts-nocheck
 import { ArrowSmallRightIcon } from '@heroicons/vue/24/solid';
 
+import { useToast } from "primevue/usetoast";
+const toast = useToast();
+
 const { t } = useI18n();
 </script>
 
@@ -64,7 +67,7 @@ const { t } = useI18n();
             <!-- TODO: Open Upload -->
             <button
               class="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              @click="emit('activate-tour')"
+              @click="toast.add({ severity: 'info', summary: 'Info', detail: 'Currently not implemented', life: 1500 });"
             >
               {{ $t('dashboard.cta.edit.button') }}
               <ArrowSmallRightIcon class="ml-2 -mr-1 h-4 w-4" />
