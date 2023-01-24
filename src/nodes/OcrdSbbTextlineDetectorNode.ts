@@ -10,7 +10,13 @@ export const OcrdSbbTextlineDetectorNode = new NodeBuilder(
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Printspace, region and textline detection' }),
+    () => ({
+      description: 'Printspace, region and textline detection',
+      parameter_descriptions: {
+        model:
+          'Path to directory containing models to be used (See https://qurator-data.de/sbb_textline_detector/)',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

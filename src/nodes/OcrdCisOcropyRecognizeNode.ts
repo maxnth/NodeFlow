@@ -16,6 +16,11 @@ export const OcrdCisOcropyRecognizeNode = new NodeBuilder(
     () => ({
       description:
         'Recognize text in (binarized+deskewed+dewarped) lines with ocropy',
+      parameter_descriptions: {
+        model: 'ocropy model to apply (e.g. fraktur.pyrnn)',
+        textequiv_level:
+          'PAGE XML hierarchy level granularity to add the TextEquiv results to',
+      },
     }),
     'SidebarDescriptionOption'
   )

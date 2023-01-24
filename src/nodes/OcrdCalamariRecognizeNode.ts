@@ -15,7 +15,18 @@ export const OcrdCalamariRecognizeNode = new NodeBuilder(
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Recognize lines with Calamari' }),
+    () => ({
+      description: 'Recognize lines with Calamari',
+      parameter_descriptions: {
+        checkpoint_dir:
+          'The directory containing calamari model files (*.ckpt.json). Uses all checkpoints in that directory',
+        glyph_conf_cutoff:
+          'Only include glyph alternatives with confidences above this threshold',
+        textequiv_level:
+          'Deepest PAGE XML hierarchy level to include TextEquiv results for',
+        voter: 'The voting algorithm to use',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

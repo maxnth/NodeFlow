@@ -36,7 +36,15 @@ export const OcrdFileformatTransformNode = new NodeBuilder(
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Convert between OCR file formats' }),
+    () => ({
+      description: 'Convert between OCR file formats',
+      parameter_descriptions: {
+        ext: 'Output extension. Set to empty string to derive extension from the media type.',
+        'from-to': 'Transformation scenario, see ocr-fileformat -L',
+        'script-args':
+          'Arguments to Saxon (for XSLT transformations) or to transformation script',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

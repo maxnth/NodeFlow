@@ -12,7 +12,15 @@ export const OcrdIm6convertNode = new NodeBuilder('OcrdIm6convert')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Convert and transform images' }),
+    () => ({
+      description: 'Convert and transform images',
+      parameter_descriptions: {
+        'input-options': 'e.g. -density 600x600 -wavelet-denoise 1%x0.1',
+        'output-format': 'Desired media type of output',
+        'output-options':
+          'e.g. -resample 300x300 -alpha deactivate -normalize -despeckle -noise 2 -negate -morphology close diamond',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

@@ -12,6 +12,10 @@ export const OcrdSegmentReplaceTextNode = new NodeBuilder(
     'ButtonOption',
     () => ({
       description: 'Insert text from annotations in single-segment text files',
+      parameter_descriptions: {
+        file_glob:
+          'glob expression which expands to file names to match against page IDs and segment IDs in order to be ingested',
+      },
     }),
     'SidebarDescriptionOption'
   )

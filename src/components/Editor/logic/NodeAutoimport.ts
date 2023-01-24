@@ -315,11 +315,11 @@ export function autoimportNodes(editor: any) {
     OcrdDinglehopperNode,
     'Evaluation'
   );
-  editor.registerNodeType(
-    'ocrd-ocropy-segment',
-    OcrdOcropySegmentNode,
-    'Image preprocessing'
-  );
+  // editor.registerNodeType(
+  //   'ocrd-ocropy-segment',
+  //   OcrdOcropySegmentNode,
+  //   'Image preprocessing'
+  // );
   editor.registerNodeType(
     'ocrd-segment-evaluate',
     OcrdSegmentEvaluateNode,
@@ -373,7 +373,7 @@ export function autoimportNodes(editor: any) {
   editor.registerNodeType(
     'ocrd-cis-ocropy-recognize',
     OcrdCisOcropyRecognizeNode,
-    'Text recognition and optimization'
+    'Text recognition'
   );
   // editor.registerNodeType(
   //   'ocrd-segment-replace-original',

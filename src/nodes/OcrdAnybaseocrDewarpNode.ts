@@ -26,6 +26,16 @@ export const OcrdAnybaseocrDewarpNode = new NodeBuilder('OcrdAnybaseocrDewarp')
     () => ({
       description:
         'Dewarps the input image with anyBaseOCR and outputs it as an AlternativeImage',
+      parameter_descriptions: {
+        gpu_id: 'CUDA device ID of GPU to use, or -1 for CPU only',
+        model_path: 'Path to the trained pix2pixHD model',
+        operation_level:
+          'PAGE XML hierarchy level to operate on (should match what model was trained on!)',
+        resize_height: 'target image height before input to the network',
+        resize_mode:
+          'transformation to apply to the original image before input to the network',
+        resize_width: 'target image width before input to the network',
+      },
     }),
     'SidebarDescriptionOption'
   )

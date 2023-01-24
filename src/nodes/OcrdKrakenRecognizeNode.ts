@@ -11,7 +11,17 @@ export const OcrdKrakenRecognizeNode = new NodeBuilder('OcrdKrakenRecognize')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'OCR with kraken' }),
+    () => ({
+      description: 'OCR with kraken',
+      parameter_descriptions: {
+        bidi_reordering:
+          'Reorder classes in the ocr_record according to  the Unicode bidirectional algorithm for correct display.',
+        device:
+          "CUDA ID (e.g. 'cuda:0') for computation on GPU, or 'cpu' to run on CPU only",
+        model: 'OCR model to recognize with',
+        pad: 'Extra blank padding to the left and right of text line.',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

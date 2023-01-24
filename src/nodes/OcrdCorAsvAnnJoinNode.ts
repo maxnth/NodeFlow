@@ -10,6 +10,10 @@ export const OcrdCorAsvAnnJoinNode = new NodeBuilder('OcrdCorAsvAnnJoin')
     'ButtonOption',
     () => ({
       description: 'Join different textline annotations by concatenation',
+      parameter_descriptions: {
+        'add-filegrp-comments':
+          'set @comments of each TextEquiv to the fileGrp it came from',
+      },
     }),
     'SidebarDescriptionOption'
   )

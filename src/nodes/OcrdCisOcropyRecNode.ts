@@ -8,7 +8,12 @@ export const OcrdCisOcropyRecNode = new NodeBuilder('OcrdCisOcropyRec')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Recognize text snippets' }),
+    () => ({
+      description: 'Recognize text snippets',
+      parameter_descriptions: {
+        model: 'ocropy model to apply (e.g. fraktur.pyrnn)',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

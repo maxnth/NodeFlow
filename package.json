@@ -22,8 +22,9 @@
     "app:dev": "vite",
     "app:build": "vue-tsc --noEmit && vite build && electron-builder",
     "app:preview": "vite preview",
+    "build": "vue-tsc --noEmit && vite build",
     "lint": "eslint --ext .js,.vue,.ts --ignore-path .gitignore --fix src",
-    "format": "prettier .  --write",
+    "format": "prettier . --write",
     "deps:update": "taze major -I"
   },
   "dependencies": {

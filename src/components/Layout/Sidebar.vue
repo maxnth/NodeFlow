@@ -69,10 +69,10 @@ const { t } = useI18n();
         </li>
       </ul>
       <div
+        v-show="!ctaHidden"
         id="dropdown-cta"
         class="invisible mt-6 rounded-lg bg-blue-50 p-4 dark:bg-blue-900 md:visible"
         role="alert"
-        v-show="!ctaHidden"
       >
         <div class="mb-3 flex items-center">
           <span
@@ -123,9 +123,9 @@ const { t } = useI18n();
           />
         </button>
       </div>
-<!--      <div class="language-container">-->
-<!--        <LanguageDropdown />-->
-<!--      </div>-->
+      <!--      <div class="language-container">-->
+      <!--        <LanguageDropdown />-->
+      <!--      </div>-->
     </div>
   </div>
 </template>

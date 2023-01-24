@@ -18,7 +18,20 @@ export const OcrdCisOcropyResegmentNode = new NodeBuilder(
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Resegment text lines' }),
+    () => ({
+      description: 'Resegment text lines',
+      parameter_descriptions: {
+        dpi: 'pixel density in dots per inch (overrides any meta-data in the images); disabled when zero or negative',
+        extend_margins:
+          'number of pixels to extend the input polygons in all directions',
+        'level-of-operation':
+          "PAGE XML hierarchy level to segment textlines in ('region' abides by existing text region boundaries, 'page' optimises lines in the whole page once",
+        method:
+          "source for new line polygon candidates ('lineest' for line estimation, i.e. how Ocropy would have segmented text lines; 'baseline' tries to re-polygonize from the baseline annotation; 'ccomps' avoids crossing connected components by majority rule)",
+        min_fraction:
+          'share of foreground pixels that must be retained by the output polygons',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

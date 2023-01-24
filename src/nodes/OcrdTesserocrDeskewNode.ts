@@ -15,6 +15,12 @@ export const OcrdTesserocrDeskewNode = new NodeBuilder('OcrdTesserocrDeskew')
     () => ({
       description:
         'Detect script, orientation and skew angle for pages or regions',
+      parameter_descriptions: {
+        dpi: 'pixel density in dots per inch (overrides any meta-data in the images)',
+        min_orientation_confidence:
+          'Minimum confidence score to apply orientation as detected by OSD',
+        operation_level: 'PAGE XML hierarchy level to operate on',
+      },
     }),
     'SidebarDescriptionOption'
   )

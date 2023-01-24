@@ -10,7 +10,10 @@ export const OcrdKrakenBinarizeNode = new NodeBuilder('OcrdKrakenBinarize')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Binarize images with kraken' }),
+    () => ({
+      description: 'Binarize images with kraken',
+      parameter_descriptions: { 'level-of-operation': 'level-of-operation' },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

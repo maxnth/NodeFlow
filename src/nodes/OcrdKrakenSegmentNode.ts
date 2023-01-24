@@ -17,7 +17,25 @@ export const OcrdKrakenSegmentNode = new NodeBuilder('OcrdKrakenSegment')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Block segmentation with kraken' }),
+    () => ({
+      description: 'Block segmentation with kraken',
+      parameter_descriptions: {
+        black_colseps:
+          'Whether column separators are assumed to be vertical black lines or not',
+        blla_classes:
+          'Class mapping for the region types trained into blla_model.',
+        blla_model:
+          'Model used for baseline detection and page segmentation. Ignored if use_legacy.',
+        device: "GPU ID or 'cpu' to run on CPU only",
+        maxcolseps:
+          'Maximum number of column separators. Set to 0 for single-column text to avoid unnecessary computation.',
+        remove_hlines: 'Remove horizontal colseps before segmentation',
+        scale: 'mean xheight size of glyphs (guessed if zero)',
+        text_direction: 'Sets principal text direction',
+        use_legacy:
+          'Use legacy box segmenter as opposed to neural net baseline segmenter',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

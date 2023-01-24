@@ -13,7 +13,18 @@ export const OcrdCisPostcorrectNode = new NodeBuilder('OcrdCisPostcorrect')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Post correct OCR results' }),
+    () => ({
+      description: 'Post correct OCR results',
+      parameter_descriptions: {
+        maxCandidates:
+          'Maximum number of considered correction candidates per suspicious token',
+        model: 'Path to the post correction model file',
+        nOCR: "Number of parallel OCR's to use for the post correction",
+        profilerConfig: "Path to the profiler's language config file",
+        profilerPath: 'Path to the profiler executable',
+        runLE: 'Do run the lexicon extension step for the post correction',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

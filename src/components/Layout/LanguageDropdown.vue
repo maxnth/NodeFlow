@@ -16,8 +16,8 @@ function changeLocale(event) {
   <Dropdown
     v-model="selectedLanguage"
     :options="languages"
-    optionLabel="flag"
-    optionValue="code"
+    option-label="flag"
+    option-value="code"
     @change="changeLocale($event)"
   />
 </template>

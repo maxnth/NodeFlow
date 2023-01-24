@@ -9,7 +9,14 @@ export const OcrdTesserocrCropNode = new NodeBuilder('OcrdTesserocrCrop')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: "Poor man's cropping via region segmentation" }),
+    () => ({
+      description: "Poor man's cropping via region segmentation",
+      parameter_descriptions: {
+        dpi: 'pixel density in dots per inch (overrides any meta-data in the images)',
+        padding:
+          'extend detected border by this many (true) pixels on every side',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

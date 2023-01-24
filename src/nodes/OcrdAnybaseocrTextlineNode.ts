@@ -34,6 +34,28 @@ export const OcrdAnybaseocrTextlineNode = new NodeBuilder(
     () => ({
       description:
         'Finds region polygons for each text line in the input image.',
+      parameter_descriptions: {
+        blackseps: 'also check for black column separators',
+        csminaspect: 'minimum aspect ratio for column separators',
+        csminheight: 'minimum column height (units=scale)',
+        expand: 'expand mask for grayscale extraction',
+        hscale: 'non-standard scaling of horizontal parameters',
+        libpath: 'Library Path for C Executables',
+        maxcolseps: 'maximum # whitespace column separators',
+        maxlines: 'non-standard scaling of horizontal parameters',
+        maxseps: 'maximum black column separators',
+        minscale: 'minimum scale permitted',
+        noise: 'noise threshold for removing small components from lines',
+        operation_level: 'PAGE XML hierarchy level to operate on',
+        overwrite: 'check whether to overwrite existing text lines',
+        pad: 'padding for extracted lines',
+        parallel: 'number of CPUs to use',
+        scale: 'the basic scale of the document (roughly, xheight) 0=automatic',
+        sepwiden: 'widen black separators (to account for warping)',
+        threshold: 'baseline threshold',
+        usegauss: 'use gaussian instead of uniform',
+        vscale: 'non-standard scaling of vertical parameters',
+      },
     }),
     'SidebarDescriptionOption'
   )

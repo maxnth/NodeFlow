@@ -15,6 +15,11 @@ export const OcrdAnybaseocrLayoutAnalysisNode = new NodeBuilder(
     () => ({
       description:
         'Generates a table-of-content like document structure of the whole document.',
+      parameter_descriptions: {
+        batch_size: 'Batch size for generating test images',
+        class_mapping_path: 'File path to layout structure classes',
+        model_path: 'Directory path to layout structure classification model',
+      },
     }),
     'SidebarDescriptionOption'
   )

@@ -28,6 +28,22 @@ export const OcrdAnybaseocrBinarizeNode = new NodeBuilder(
     () => ({
       description:
         'Binarizes images with the algorithm from ocropy and outputs it as an AlternativeImage.',
+      parameter_descriptions: {
+        bignore: 'ignore this much of the border for threshold estimation',
+        debug: 'display intermediate results',
+        escale: 'scale for estimating a mask over the text region',
+        gray: 'force grayscale processing even if image seems binary',
+        hi: 'percentile for white estimation',
+        lo: 'percentile for black estimation',
+        nocheck: 'disable error checking on inputs',
+        operation_level: 'PAGE XML hierarchy level to operate on',
+        perc: 'percentage for filters',
+        range: 'range for filters',
+        raw_copy: 'also copy the raw image',
+        show: 'display final results',
+        threshold: 'threshold, determines lightness',
+        zoom: 'zoom for page background estimation, smaller=faster',
+      },
     }),
     'SidebarDescriptionOption'
   )

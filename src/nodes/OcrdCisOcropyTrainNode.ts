@@ -13,7 +13,15 @@ export const OcrdCisOcropyTrainNode = new NodeBuilder('OcrdCisOcropyTrain')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'train model with ground truth from mets data' }),
+    () => ({
+      description: 'train model with ground truth from mets data',
+      parameter_descriptions: {
+        model: 'load model or crate new one (e.g. fraktur.pyrnn)',
+        ntrain: 'lines to train before stopping',
+        outputpath: '(existing) path for the trained model',
+        textequiv_level: 'PAGE XML hierarchy level granularity',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

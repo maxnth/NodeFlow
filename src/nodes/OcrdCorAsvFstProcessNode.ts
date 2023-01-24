@@ -20,6 +20,21 @@ export const OcrdCorAsvFstProcessNode = new NodeBuilder('OcrdCorAsvFstProcess')
     () => ({
       description:
         'Improve text annotation by FST error and lexicon model with character-level LSTM language model',
+      parameter_descriptions: {
+        beam_width:
+          'maximum number of best partial paths to consider during beam search in language modelling',
+        errorfst_file: 'path of FST file for error model',
+        keraslm_file:
+          'path of h5py weight/config file for language model trained with keraslm',
+        lexiconfst_file: 'path of FST file for lexicon model',
+        lm_weight: 'share of the LM scores over the FST output confidences',
+        pruning_weight:
+          'transition weight for pruning the hypotheses in each word window FST',
+        rejection_weight:
+          'transition weight (per character) for unchanged input in each word window FST',
+        textequiv_level:
+          'PAGE XML hierarchy level to read TextEquiv input on (output will always be word level)',
+      },
     }),
     'SidebarDescriptionOption'
   )

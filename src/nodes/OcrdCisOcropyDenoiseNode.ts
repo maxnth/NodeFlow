@@ -12,7 +12,16 @@ export const OcrdCisOcropyDenoiseNode = new NodeBuilder('OcrdCisOcropyDenoise')
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Despeckle pages / regions / lines with ocropy' }),
+    () => ({
+      description: 'Despeckle pages / regions / lines with ocropy',
+      parameter_descriptions: {
+        dpi: 'pixel density in dots per inch (overrides any meta-data in the images); disabled when zero or negative',
+        'level-of-operation':
+          'PAGE XML hierarchy level granularity to annotate images for',
+        noise_maxsize:
+          'maximum size in points (pt) for connected components to regard as noise (0 will deactivate denoising)',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

@@ -16,7 +16,14 @@ export const OcrdSkimageDenoiseRawNode = new NodeBuilder(
   .addOption(
     'Description',
     'ButtonOption',
-    () => ({ description: 'Denoise raw images with Scikit-image' }),
+    () => ({
+      description: 'Denoise raw images with Scikit-image',
+      parameter_descriptions: {
+        dpi: 'pixel density in dots per inch (overrides any meta-data in the images); disabled when zero',
+        'level-of-operation': 'PAGE XML hierarchy level to operate on',
+        method: 'Wavelet filtering scheme to use',
+      },
+    }),
     'SidebarDescriptionOption'
   )
   .build();

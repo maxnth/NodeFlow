@@ -33,13 +33,13 @@ const items = ref([
       :radius="120"
       direction="up-left"
       type="quarter-circle"
-      :tooltipOptions="{ position: 'left' }"
+      :tooltip-options="{ position: 'left' }"
     />
   </div>
 </template>
 
 <style>
-.p-button{
-  @apply bg-blue-600 dark:bg-blue-800 !important
+.p-button {
+  @apply bg-blue-600 dark:bg-blue-800 !important;
 }
 </style>

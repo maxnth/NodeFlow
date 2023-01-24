@@ -26,6 +26,12 @@ export const OcrdSegmentExtractGlyphsNode = new NodeBuilder(
     () => ({
       description:
         'Extract glyph segmentation as glyph images (deskewed according to `*/@orientation` and cropped+masked along `*/Coords` polygon and dewarped as in `*/AlternativeImage`) + text file (according to `*/TextEquiv`) + JSON (including line coordinates and meta-data).',
+      parameter_descriptions: {
+        feature_filter:
+          'Comma-separated list of forbidden image features (e.g. `binarized,despeckled`).',
+        mimetype: 'File format to save extracted images in.',
+        transparency: 'Add alpha channels with segment masks to the images',
+      },
     }),
     'SidebarDescriptionOption'
   )

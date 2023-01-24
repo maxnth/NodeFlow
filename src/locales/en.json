@@ -13,7 +13,7 @@
     "cta": {
       "create": {
         "heading": "Create",
-        "content": "Use the Workflow Editor to create an OCR workflow from scratch",
+        "content": "Create an OCR workflow from scratch with the editor",
         "button": "Open Editor"
       },
       "edit": {

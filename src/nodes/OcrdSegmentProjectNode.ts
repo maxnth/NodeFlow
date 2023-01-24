@@ -13,6 +13,11 @@ export const OcrdSegmentProjectNode = new NodeBuilder('OcrdSegmentProject')
     'ButtonOption',
     () => ({
       description: 'Project segment coordinates to their structural parents',
+      parameter_descriptions: {
+        'level-of-operation':
+          'hierarchy level which to assign new coordinates to',
+        padding: 'margin (in px) to extend the hull in every direction',
+      },
     }),
     'SidebarDescriptionOption'
   )

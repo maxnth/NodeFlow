@@ -22,6 +22,18 @@ export const OcrdAnybaseocrDeskewNode = new NodeBuilder('OcrdAnybaseocrDeskew')
     () => ({
       description:
         'Deskews images with the algorithm from ocropy and outputs a deskew angle.',
+      parameter_descriptions: {
+        bignore: 'ignore this much of the border for threshold estimation',
+        debug: 'display intermediate results',
+        escale: 'scale for estimating a mask over the text region',
+        hi: 'percentile for white estimation',
+        lo: 'percentile for black estimation',
+        maxskew: 'skew angle estimation parameters (degrees)',
+        operation_level: 'PAGE XML hierarchy level to operate on',
+        parallel: '???',
+        skewsteps: 'steps for skew angle estimation (per degree)',
+        threshold: 'threshold, determines lightness',
+      },
     }),
     'SidebarDescriptionOption'
   )

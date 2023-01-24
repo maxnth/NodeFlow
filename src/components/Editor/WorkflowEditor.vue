@@ -39,7 +39,7 @@ export default {
 
     // register the nodes we have defined, so they can be
     // added by the user as well as saved & loaded.
-    this.editor.registerNodeType('InputNode', InputNode);
+    this.editor.registerNodeType('Input', InputNode);
 
     this.viewPlugin.registerOption(
       'SidebarDescriptionOption',

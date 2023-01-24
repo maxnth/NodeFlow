@@ -13,6 +13,10 @@ export const OcrdDinglehopperNode = new NodeBuilder('OcrdDinglehopper')
     'ButtonOption',
     () => ({
       description: 'Evaluate OCR text against ground truth with dinglehopper',
+      parameter_descriptions: {
+        metrics: 'Enable/disable metrics and green/red',
+        textequiv_level: 'PAGE XML hierarchy level to extract the text from',
+      },
     }),
     'SidebarDescriptionOption'
   )

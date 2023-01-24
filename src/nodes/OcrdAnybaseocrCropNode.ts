@@ -23,6 +23,33 @@ export const OcrdAnybaseocrCropNode = new NodeBuilder('OcrdAnybaseocrCrop')
     () => ({
       description:
         "Detect the input images' page frame, annotate it as border polygon and add a cropped derived image.",
+      parameter_descriptions: {
+        columnAreaMin:
+          'text block detection: minimum area of individual columns (as ratio of total image pixels)',
+        columnSepWidthMax:
+          'text block detection: maximum width between individual columns (as ratio of total image width)',
+        dpi: 'pixel density in dots per inch (used to zoom/scale during processing; overrides any meta-data in the images); disabled when zero or negative',
+        marginBottom:
+          'ruler / edge / text detection: minimum y position to crop from below (as ratio of total image height)',
+        marginLeft:
+          'ruler / edge / text detection: maximum x position to crop from left (as ratio of total image width)',
+        marginRight:
+          'ruler / edge / text detection: minimum x position to crop from right (as ratio of total image width)',
+        marginTop:
+          'ruler / edge / text detection: maximum y position to crop from above (as ratio of total image height)',
+        padding:
+          'extend / shrink border resulting from edge detection / text detection by this many px in each direction',
+        rulerAreaMax:
+          'ruler detection and suppression: maximum area of bbox (as ratio of total image pixels)',
+        rulerAreaMin:
+          'ruler detection and suppression: minimum area of bbox (as ratio of total image pixels)',
+        rulerRatioMax:
+          'ruler detection and suppression: maximum aspect ratio of bbox',
+        rulerRatioMin:
+          'ruler detection and suppression: minimum aspect ratio of bbox',
+        rulerWidthMax:
+          'ruler detection and suppression: maximum width of bbox (as ratio of total image width)',
+      },
     }),
     'SidebarDescriptionOption'
   )
