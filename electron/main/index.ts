@@ -2,6 +2,8 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
 
+const fs = require("fs");
+
 // The built directory structure
 //
 // ├─┬ dist-electron
@@ -104,6 +106,14 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+ipcMain.on('save-file', async (event, data) => {
+  const homeDir = require('os').homedir();
+  const desktopDir = `${homeDir}/Desktop`;
+  const outName = `${desktopDir}/workflow_${Math.floor(Date.now() / 1000)}.json`
+  fs.writeFileSync(outName, data);
+});
+
 
 // New window example arg: new windows url
 ipcMain.handle('open-win', (_, arg) => {

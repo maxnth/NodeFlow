@@ -12,6 +12,7 @@ import { InputNode } from '../../nodes/InputNode';
 
 import { autoimportNodes } from './logic/NodeAutoimport';
 import SidebarDescriptionOption from '~/components/Editor/Custom/SidebarDescriptionOption.vue';
+import {ipcRenderer} from "electron";
 
 // TODO: still uses options API as baklavajs v1.x is buggy with the composition API. Should be migrated when baklavajs v2.x is stable
 export default {
@@ -64,12 +65,12 @@ export default {
       return n;
     },
     upload(state) {
-      // TODO: Implement loading from file
-      this.editor.load(state);
+      // TODO: Implement loading from files
+      // this.editor.load(state);
     },
-    download() {
-      // TODO: Implement saving current editor state to file
-      console.log(this.editor.save());
+    async download() {
+      // TODO: Implement saving current editor state to file correctly
+      ipcRenderer.send("save-file", JSON.stringify(this.editor.save()))
     },
     clear() {
       // TODO: Find out why one can't just iterate once to remove all nodes
