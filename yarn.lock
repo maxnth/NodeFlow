@@ -3201,10 +3201,10 @@ primeicons@^6.0.1:
   resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-6.0.1.tgz#431fa7c79825934eefd62087d8e1faa6a9e376ad"
   integrity sha512-KDeO94CbWI4pKsPnYpA1FPjo79EsY9I+M8ywoPBSf9XMXoe/0crjbUK7jcQEDHuc0ZMRIZsxH3TYLv4TUtHmAA==
 
-primevue@^3.22.3:
-  version "3.22.3"
-  resolved "https://registry.yarnpkg.com/primevue/-/primevue-3.22.3.tgz#62253c8477fec090e86b0ca74493b34b48a3b5a0"
-  integrity sha512-0s40+wc7YvuGzx0giT9/xxJctV2OXwgSdu3+LEa21CIg5+IWmTIlKXwaPaWKuFVuO8tKz8BrQr0Va0j4SObYKw==
+primevue@^3.22.4:
+  version "3.22.4"
+  resolved "https://registry.yarnpkg.com/primevue/-/primevue-3.22.4.tgz#127f3fb602346648b479a3cb3b9fbfe9cf952571"
+  integrity sha512-4FHiLhtPOMBgvUXpiiuRb0mCRihiI83dhHoQEx3wOumz/fHCWtZ5D+A+VZPGcVTCrQvFpVfOpHBklpYdw1yJ2g==
 
 proc-log@^2.0.0, proc-log@^2.0.1:
   version "2.0.1"
