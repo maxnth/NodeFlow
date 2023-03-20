@@ -4033,10 +4033,10 @@ verror@^1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-electron-renderer@^0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-electron-renderer/-/vite-plugin-electron-renderer-0.13.0.tgz#291701bda16f6f0a1d1e075298e107b514e4f37d"
-  integrity sha512-XLGT5JSEx3IS+ejxAtkk4S1yZlIbonnQMzh15Xnc0ZVHukzmpNqddrqUGZuwPpRHFk1aA/uMZMb+dkSS/cATOg==
+vite-plugin-electron-renderer@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-electron-renderer/-/vite-plugin-electron-renderer-0.12.1.tgz#0f70ad159d6cbb6f2c2173824a57a1dbda040b2d"
+  integrity sha512-n0w8vrQFafaY1tmIPIQAck4zLanGLYcthvGttH00KRJg47Sjh2mp5Hb8VJ3l8FmpnYTobnl949+N4sunTR1WBA==
   dependencies:
     lib-esm "~0.3.0"
 
