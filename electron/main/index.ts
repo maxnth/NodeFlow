@@ -44,7 +44,7 @@ const indexHtml = join(process.env.DIST, 'index.html');
 
 async function createWindow() {
   win = new BrowserWindow({
-    title: 'Hephaistos',
+    title: 'NodeFlow',
     icon: join(process.env.PUBLIC, 'favicon.ico'),
     width: 1200,
     height: 750,
