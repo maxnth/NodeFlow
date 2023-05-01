@@ -35,3 +35,7 @@
   height: auto !important;
   width: auto !important;
 }
+
+.dark-context-menu{
+  min-width: 15rem !important;
+}
