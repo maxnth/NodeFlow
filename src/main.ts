@@ -4,7 +4,6 @@ import { createI18n } from 'vue-i18n';
 
 import App from './App.vue';
 
-import './samples/node-api';
 import router from './router';
 
 import { BaklavaVuePlugin } from '@baklavajs/plugin-renderer-vue3';
