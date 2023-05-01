@@ -8,9 +8,9 @@ import { ViewPlugin } from '@baklavajs/plugin-renderer-vue3';
 import { OptionPlugin } from '@baklavajs/plugin-options-vue3';
 import { Engine } from '@baklavajs/plugin-engine';
 
-import { InputNode } from '../../nodes/InputNode';
+import { InputNode } from '~/nodes/InputNode';
 
-import { autoimportNodes } from './logic/NodeAutoimport';
+import { importNodesFromFile } from '~/utils/NodeImport'
 import SidebarDescriptionOption from '~/components/Editor/Custom/SidebarDescriptionOption.vue';
 import {ipcRenderer} from "electron";
 
@@ -49,7 +49,11 @@ export default {
     );
 
     // NODES
-    autoimportNodes(this.editor);
+    Promise.resolve(importNodesFromFile()).then(nodes => {
+      for(const node of nodes){
+        this.editor.registerNodeType(node.name, node.interface, node.category)
+      }
+    })
 
     // add some nodes so the screen is not empty on startup
     this.addNodeWithCoordinates(InputNode, 100, 350);
