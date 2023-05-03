@@ -6,9 +6,6 @@ import App from './App.vue';
 
 import router from './router';
 
-import { BaklavaVuePlugin } from '@baklavajs/plugin-renderer-vue3';
-import '@baklavajs/plugin-renderer-vue3/dist/styles.css';
-
 import PrimeVue from 'primevue/config';
 import 'primevue/resources/primevue.min.css';
 import 'primevue/resources/themes/tailwind-light/theme.css';
@@ -51,7 +48,6 @@ const i18n = createI18n({
 app.use(i18n);
 app.use(createPinia());
 app.use(router);
-app.use(BaklavaVuePlugin);
 app.use(PrimeVue);
 app.use(ToastService);
 app.use(VueShepherd);

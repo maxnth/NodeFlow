@@ -33,6 +33,7 @@
     "@baklavajs/plugin-options-vue3": "^1.9.3",
     "@baklavajs/plugin-renderer-vue3": "^1.9.3",
     "@heroicons/vue": "^2.0.17",
+    "baklavajs": "^2.0.2-beta.3",
     "primeicons": "^6.0.1",
     "primevue": "^3.27.0",
     "vue-shepherd": "^3.0.0"
