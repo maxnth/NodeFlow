@@ -9,8 +9,8 @@ const { t } = useI18n();
 </script>
 
 <template>
-  <div class="flex h-screen items-center justify-center p-20">
-    <div class="container">
+  <div class="flex h-screen items-center justify-center">
+    <div class="container m-4">
       <div>
         <h1
           class="my-4 text-center text-7xl font-bold leading-tight text-black opacity-90 dark:text-white"
@@ -30,13 +30,13 @@ const { t } = useI18n();
           <div
             class="mt-auto h-full rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
-            <a href="#">
+            <div>
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
               >
                 {{ $t('dashboard.cta.create.heading') }}
               </h5>
-            </a>
+            </div>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {{ $t('dashboard.cta.create.content') }}
             </p>
@@ -54,13 +54,13 @@ const { t } = useI18n();
           <div
             class="mt-auto h-full rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
-            <a href="#">
+            <div>
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
               >
                 {{ $t('dashboard.cta.edit.heading') }}
               </h5>
-            </a>
+            </div>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {{ $t('dashboard.cta.edit.content') }}
             </p>
@@ -78,13 +78,13 @@ const { t } = useI18n();
           <div
             class="mt-auto h-full rounded-lg border border-gray-200 bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
-            <a href="#">
+            <div>
               <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
               >
                 {{ $t('dashboard.cta.tour.heading') }}
               </h5>
-            </a>
+            </div>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {{ $t('dashboard.cta.tour.content') }}
             </p>
