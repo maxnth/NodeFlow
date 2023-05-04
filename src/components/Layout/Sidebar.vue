@@ -1,30 +1,38 @@
 <script setup lang="ts">
-import LanguageDropdown from './LanguageDropdown.vue';
-
 import {
   HomeIcon,
   CubeTransparentIcon,
   PresentationChartLineIcon,
+  CommandLineIcon,
   MoonIcon,
   SunIcon,
+  Cog6ToothIcon
 } from '@heroicons/vue/24/solid';
+
+import SettingsModal from "~/components/Settings/SettingsModal.vue";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
+const settingsRef = ref()
 const ctaHidden = ref(false);
 
 const { t } = useI18n();
+
+function openSettingsModel(){
+  settingsRef.value.openModal()
+}
 </script>
 
 <template>
+  <SettingsModal ref="settingsRef" />
   <div
     class="flex w-64 flex-col justify-between overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800"
   >
     <div>
       <a class="mb-5 flex items-center pl-2.5">
         <img
-          src="/public/images/application/icon.svg"
+          src="/images/application/icon.svg"
           class="mr-3 h-6 sm:h-7"
           alt="NodeFlow Logo"
         />
@@ -54,6 +62,17 @@ const { t } = useI18n();
               class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
             />
             <span class="ml-3 truncate">Workflow Editor</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            to="/command-center"
+            class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+          >
+            <CommandLineIcon
+              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+            />
+            <span class="ml-3 truncate">Command Center</span>
           </router-link>
         </li>
         <li>
@@ -123,9 +142,13 @@ const { t } = useI18n();
           />
         </button>
       </div>
-      <!--      <div class="language-container">-->
-      <!--        <LanguageDropdown />-->
-      <!--      </div>-->
+      <button class="settings">
+        <Cog6ToothIcon
+          aria-hidden="true"
+          class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+          @click="openSettingsModel"
+        />
+      </button>
     </div>
   </div>
 </template>

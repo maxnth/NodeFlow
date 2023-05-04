@@ -2,6 +2,8 @@
 const electron = require("electron");
 const node_os = require("node:os");
 const node_path = require("node:path");
+const Docker = require("dockerode");
+const { exec } = require("child_process");
 const fs = require("fs");
 process.env.DIST_ELECTRON = node_path.join(__dirname, "..");
 process.env.DIST = node_path.join(process.env.DIST_ELECTRON, "../dist");
@@ -71,11 +73,105 @@ electron.app.on("activate", () => {
     createWindow();
   }
 });
+async function saveFile(data) {
+  const { canceled, filePath } = await electron.dialog.showSaveDialog(electron.BrowserWindow.getFocusedWindow(), {
+    properties: ["createDirectory"]
+  });
+  if (canceled) {
+    return new Promise((resolve, reject) => {
+      resolve(false);
+    });
+  } else {
+    return new Promise((resolve, reject) => {
+      fs.writeFileSync(filePath, data);
+      resolve(true);
+    });
+  }
+}
 electron.ipcMain.on("save-file", async (event, data) => {
-  const homeDir = require("os").homedir();
-  const desktopDir = `${homeDir}/Desktop`;
-  const outName = `${desktopDir}/workflow_${Math.floor(Date.now() / 1e3)}.json`;
-  fs.writeFileSync(outName, data);
+  return await saveFile(data);
+});
+function loadWorkflowFromFile(path) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, "utf8", (err, content) => {
+      if (err) {
+        return;
+      }
+      resolve(content);
+    });
+  });
+}
+electron.ipcMain.handle("load-workflow-from-file", async (event, path) => {
+  return await loadWorkflowFromFile(path);
+});
+function isDockerAvailable() {
+  return new Promise((resolve, reject) => {
+    const docker = new Docker();
+    docker.listContainers(function(err, containers) {
+      resolve(!err);
+    });
+  });
+}
+electron.ipcMain.handle("is-docker-available", async (event, ...args) => {
+  return await isDockerAvailable();
+});
+function pullOcrdDockerImage() {
+  return new Promise((resolve, reject) => {
+    const docker = new Docker();
+    docker.pull("ocrd/all:maximum", function(err, stream) {
+      docker.modem.followProgress(stream, onFinished, onProgress);
+      function onFinished(err2, output) {
+        if (!err2) {
+          resolve(true);
+        }
+      }
+      function onProgress(event) {
+        console.log(event);
+      }
+    });
+  });
+}
+electron.ipcMain.handle("pull-ocrd-docker-image", async (event, args) => {
+  return await pullOcrdDockerImage();
+});
+electron.ipcMain.on("open-docker-setup-guide", (event, ...args) => {
+  require("electron").shell.openExternal("https://docs.docker.com/get-docker/");
+});
+async function getDirectory() {
+  const { canceled, filePaths } = await electron.dialog.showOpenDialog(electron.BrowserWindow.getFocusedWindow(), {
+    properties: ["openDirectory"]
+  });
+  if (canceled) {
+    return;
+  } else {
+    return new Promise((resolve, reject) => {
+      resolve(filePaths[0]);
+    });
+  }
+}
+electron.ipcMain.handle("get-directory", async (event, args) => {
+  return await getDirectory();
+});
+function initOcrdWorkspace(path) {
+  const command = `docker run --rm -v ${path}:/data -w /data -- ocrd/all:maximum ocrd workspace -d /data init`;
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        resolve(false);
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        if (!stderr.includes("Writing METS to /data/mets.xml"))
+          resolve(false);
+      }
+      console.log(`stdout: ${stdout}`);
+      resolve(true);
+    });
+  });
+}
+electron.ipcMain.handle("init-ocrd-workspace", async (event, path) => {
+  return await initOcrdWorkspace(path);
 });
 electron.ipcMain.handle("open-win", (_, arg) => {
   const childWindow = new electron.BrowserWindow({

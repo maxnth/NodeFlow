@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Sidebar from './components/Layout/Sidebar.vue';
 import Toast from 'primevue/toast';
-
 </script>
 
 <template>
@@ -9,7 +8,9 @@ import Toast from 'primevue/toast';
     <Toast />
     <Sidebar />
     <div style="height: 100vh; width: 100%" class="dark:bg-gray-700">
-      <router-view />
+      <Suspense>
+        <router-view />
+      </Suspense>
     </div>
   </div>
 </template>

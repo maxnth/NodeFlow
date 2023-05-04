@@ -25,6 +25,19 @@
         "heading": "Tour",
         "content": "Take a tour to the NodeFlow editor",
         "button": "Start Tour"
+      },
+      "launch": {
+        "heading": "Launch",
+        "content": "Directly launch your workflows from NodeFlow",
+        "button": "Open Command Center"
+      }
+    }
+  },
+  "command-center": {
+    "docker": {
+      "inactive": {
+        "not-responding": "Looks like Docker doesn't respond",
+        "install": "Install Docker"
       }
     }
   },

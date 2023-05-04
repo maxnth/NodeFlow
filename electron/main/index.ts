@@ -1,7 +1,9 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, dialog, BrowserWindow, shell, ipcMain } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
 
+const Docker = require('dockerode')
+const { exec } = require('child_process');
 const fs = require("fs");
 
 // The built directory structure
@@ -107,13 +109,116 @@ app.on('activate', () => {
   }
 });
 
+async function saveFile(data){
+  const { canceled, filePath } = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+    properties: ['createDirectory']
+  })
+  if (canceled) {
+    return new Promise((resolve, reject) => {
+      resolve(false)
+    })
+  } else {
+    return new Promise((resolve, reject) => {
+      fs.writeFileSync(filePath, data)
+      resolve(true)
+    })
+  }
+}
+
 ipcMain.on('save-file', async (event, data) => {
-  const homeDir = require('os').homedir();
-  const desktopDir = `${homeDir}/Desktop`;
-  const outName = `${desktopDir}/workflow_${Math.floor(Date.now() / 1000)}.json`
-  fs.writeFileSync(outName, data);
+  return await saveFile(data)
 });
 
+
+function loadWorkflowFromFile(path: string){
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, "utf8", (err, content) => {
+      if (err) {
+        return;
+      }
+      resolve(content)
+    })
+  })
+}
+ipcMain.handle('load-workflow-from-file', async (event, path: string) => {
+  return await loadWorkflowFromFile(path)
+})
+
+function isDockerAvailable () {
+  return new Promise((resolve, reject) => {
+    const docker = new Docker()
+    docker.listContainers(function (err, containers) {
+      resolve(!err)
+    });
+  })
+}
+ipcMain.handle('is-docker-available', async (event, ...args) => {
+  return await isDockerAvailable()
+})
+
+function pullOcrdDockerImage() {
+  return new Promise((resolve, reject) => {
+    const docker = new Docker()
+    docker.pull('ocrd/all:maximum', function (err, stream) {
+      docker.modem.followProgress(stream, onFinished, onProgress)
+      function onFinished(err, output) {
+        if(!err){
+          resolve(true)
+        }
+      }
+      function onProgress(event) {
+        console.log(event)
+      }
+    });
+  })
+}
+
+ipcMain.handle("pull-ocrd-docker-image", async (event, args) => {
+  return await pullOcrdDockerImage()
+})
+
+ipcMain.on('open-docker-setup-guide', (event, ...args) => {
+  require('electron').shell.openExternal("https://docs.docker.com/get-docker/");
+})
+
+async function getDirectory() {
+  const { canceled, filePaths } = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
+    properties: ['openDirectory']
+  })
+  if (canceled) {
+    return
+  } else {
+    return new Promise((resolve, reject) => {
+      resolve(filePaths[0])
+    })
+  }
+}
+
+ipcMain.handle("get-directory", async (event, args) => {
+  return await getDirectory()
+})
+
+function initOcrdWorkspace(path: string) {
+  const command = `docker run --rm -v ${path}:/data -w /data -- ocrd/all:maximum ocrd workspace -d /data init`
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        resolve(false)
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        if(!stderr.includes("Writing METS to /data/mets.xml")) resolve(false)
+      }
+      console.log(`stdout: ${stdout}`);
+      resolve(true)
+    });
+  })
+}
+
+ipcMain.handle("init-ocrd-workspace", async (event, path: string) => {
+  return await initOcrdWorkspace(path)
+})
 
 // New window example arg: new windows url
 ipcMain.handle('open-win', (_, arg) => {

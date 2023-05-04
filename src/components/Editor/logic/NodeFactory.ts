@@ -1,4 +1,5 @@
 import {
+  allowMultipleConnections,
   ButtonInterface,
   CheckboxInterface,
   IntegerInterface,
@@ -36,19 +37,19 @@ function constructNodes(nodeData: object){
   const nodes: object[] = []
   for(const [name, data] of Object.entries(nodeData)){
     const node = createNodeType(name, data)
-    const category = data.categories !== undefined && data.categories.length > 0 ? data.categories.at(0) : "undefined"
+    const category = data.categories !== undefined && data.categories.length > 0 ? data.categories.at(0) : "Undefined"
     nodes.push({node: node, category: category})
   }
   return nodes
 }
 function createNodeType(name: string, nodeData: INode) {
-  const inputs: object = {}
+  const inputs: {[index: string]: any} = {}
   if(nodeData.parameters !== undefined) {
     for (const [paramName, paramData] of Object.entries(nodeData.parameters)) {
       switch (paramData.type) {
         case "string":
           if (paramData.enum !== undefined) {
-            inputs[paramName] = new SelectInterface(paramName, paramData.default, paramData.enum).setPort(false)
+            inputs[paramName] = new SelectInterface(paramName, paramData.default, paramData.enum).setPort(false).use(allowMultipleConnections)
           } else {
             inputs[paramName] = new TextInputInterface(paramName, paramData.default).setPort(false)
           }
@@ -74,10 +75,11 @@ function createNodeType(name: string, nodeData: INode) {
   }
 
   return class extends Node<any, any> {
-    private title = name
-    private type = name
-    private inputs = inputs
-    private outputs = outputs
+    public title = name
+    public type = name
+    // @ts-ignore
+    public inputs = inputs
+    public outputs = outputs
     constructor() {
       super();
       this.title = name
