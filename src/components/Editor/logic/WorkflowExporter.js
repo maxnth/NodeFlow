@@ -97,16 +97,16 @@ function buildExportStringFromPaths(paths){
 
       for(const [key, value] of Object.entries(processor.inputs)){
         if(reservedNames.indexOf(key) === -1){
-          processorCall.push("-P")
-          processorCall.push(key)
-          processorCall.push(value.value)
+          if(value.value){
+            processorCall.push("-P")
+            processorCall.push(key)
+            processorCall.push(value.value)
+          }
         }
       }
       call.push("'" + processorCall.join(" ") + "'")
     }
   }
-
-
   return call.join(" ")
 }
 

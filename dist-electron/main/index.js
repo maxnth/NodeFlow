@@ -2,6 +2,7 @@
 const electron = require("electron");
 const node_os = require("node:os");
 const node_path = require("node:path");
+const path = require("path");
 const Docker = require("dockerode");
 const { exec } = require("child_process");
 const fs = require("fs");
@@ -91,9 +92,27 @@ async function saveFile(data) {
 electron.ipcMain.on("save-file", async (event, data) => {
   return await saveFile(data);
 });
-function loadWorkflowFromFile(path) {
+async function exportResults(resultPath) {
+  const { canceled, filePath } = await electron.dialog.showSaveDialog(electron.BrowserWindow.getFocusedWindow(), {
+    properties: ["createDirectory"]
+  });
+  if (canceled) {
+    return new Promise((resolve, reject) => {
+      resolve(false);
+    });
+  } else {
+    return new Promise((resolve, reject) => {
+      fs.writeFileSync(filePath, resultPath);
+      resolve(true);
+    });
+  }
+}
+electron.ipcMain.on("export-results", async (event, resultPath) => {
+  return await exportResults(resultPath);
+});
+function loadWorkflowFromFile(path2) {
   return new Promise((resolve, reject) => {
-    fs.readFile(path, "utf8", (err, content) => {
+    fs.readFile(path2, "utf8", (err, content) => {
       if (err) {
         return;
       }
@@ -101,8 +120,8 @@ function loadWorkflowFromFile(path) {
     });
   });
 }
-electron.ipcMain.handle("load-workflow-from-file", async (event, path) => {
-  return await loadWorkflowFromFile(path);
+electron.ipcMain.handle("load-workflow-from-file", async (event, path2) => {
+  return await loadWorkflowFromFile(path2);
 });
 function isDockerAvailable() {
   return new Promise((resolve, reject) => {
@@ -126,7 +145,13 @@ function pullOcrdDockerImage() {
         }
       }
       function onProgress(event) {
-        console.log(event);
+        if (event.progressDetail !== void 0) {
+          const detail = event.progressDetail;
+          if (detail.current !== void 0 && detail.total !== void 0) {
+            const percentage = Math.round(detail.total / detail.current);
+            console.log(percentage);
+          }
+        }
       }
     });
   });
@@ -152,9 +177,11 @@ async function getDirectory() {
 electron.ipcMain.handle("get-directory", async (event, args) => {
   return await getDirectory();
 });
-function initOcrdWorkspace(path) {
-  const command = `docker run --rm -v ${path}:/data -w /data -- ocrd/all:maximum ocrd workspace -d /data init`;
+function initOcrdWorkspace(_path) {
   return new Promise((resolve, reject) => {
+    fs.mkdirSync(_path);
+    fs.mkdirSync(path.join(_path, "OCR-D-IMG"));
+    const command = `docker run --rm -v ${_path}:/data -w /data -- ocrd/all:maximum ocrd workspace -d /data init`;
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
@@ -170,8 +197,26 @@ function initOcrdWorkspace(path) {
     });
   });
 }
-electron.ipcMain.handle("init-ocrd-workspace", async (event, path) => {
-  return await initOcrdWorkspace(path);
+electron.ipcMain.handle("init-ocrd-workspace", async (event, timestamp) => {
+  return await initOcrdWorkspace(path.join(electron.app.getAppPath(), timestamp));
+});
+function uploadImagesToWorkspace(paths, workspaceName) {
+  return new Promise((resolve, reject) => {
+    const workspacePath = path.join(electron.app.getAppPath(), workspaceName);
+    const imgPath = path.join(workspacePath, "OCR-D-IMG");
+    for (const _path of paths) {
+      const baseName = path.parse(_path).base;
+      const fileName = path.parse(_path).name;
+      const target = path.join(imgPath, baseName);
+      fs.copyFileSync(_path, target);
+      const command = `docker run --rm -u $(id -u) -v ${workspacePath}:/data -w /data -- ocrd/all:maximum ocrd workspace add -G OCR-D-IMG -i OCR-D-IMG_${fileName} -g P_${fileName} -m image/tif OCR-D-IMG/${baseName}`;
+      require("child_process").execSync(command);
+    }
+    resolve(true);
+  });
+}
+electron.ipcMain.handle("upload-images-to-workspace", async (event, data) => {
+  return await uploadImagesToWorkspace(data.paths, data.workspaceName);
 });
 electron.ipcMain.handle("open-win", (_, arg) => {
   const childWindow = new electron.BrowserWindow({

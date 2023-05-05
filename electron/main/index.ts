@@ -1,6 +1,7 @@
 import { app, dialog, BrowserWindow, shell, ipcMain } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
+import path from "path";
 
 const Docker = require('dockerode')
 const { exec } = require('child_process');
@@ -129,6 +130,26 @@ ipcMain.on('save-file', async (event, data) => {
   return await saveFile(data)
 });
 
+async function exportResults(resultPath){
+  const { canceled, filePath } = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+    properties: ['createDirectory']
+  })
+  if (canceled) {
+    return new Promise((resolve, reject) => {
+      resolve(false)
+    })
+  } else {
+    return new Promise((resolve, reject) => {
+      fs.writeFileSync(filePath, resultPath)
+      resolve(true)
+    })
+  }
+}
+
+ipcMain.on('export-results', async (event, resultPath) => {
+  return await exportResults(resultPath)
+});
+
 
 function loadWorkflowFromFile(path: string){
   return new Promise((resolve, reject) => {
@@ -167,7 +188,13 @@ function pullOcrdDockerImage() {
         }
       }
       function onProgress(event) {
-        console.log(event)
+        if(event.progressDetail !== undefined){
+          const detail = event.progressDetail
+          if(detail.current !== undefined && detail.total !== undefined){
+            const percentage = Math.round(detail.total / detail.current)
+            console.log(percentage)
+          }
+        }
       }
     });
   })
@@ -198,9 +225,11 @@ ipcMain.handle("get-directory", async (event, args) => {
   return await getDirectory()
 })
 
-function initOcrdWorkspace(path: string) {
-  const command = `docker run --rm -v ${path}:/data -w /data -- ocrd/all:maximum ocrd workspace -d /data init`
+function initOcrdWorkspace(_path: string) {
   return new Promise((resolve, reject) => {
+    fs.mkdirSync(_path)
+    fs.mkdirSync(path.join(_path, "OCR-D-IMG"))
+    const command = `docker run --rm -v ${_path}:/data -w /data -- ocrd/all:maximum ocrd workspace -d /data init`
     exec(command, (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
@@ -213,11 +242,31 @@ function initOcrdWorkspace(path: string) {
       console.log(`stdout: ${stdout}`);
       resolve(true)
     });
+
   })
 }
 
-ipcMain.handle("init-ocrd-workspace", async (event, path: string) => {
-  return await initOcrdWorkspace(path)
+ipcMain.handle("init-ocrd-workspace", async (event, timestamp: string) => {
+  return await initOcrdWorkspace(path.join(app.getAppPath(), timestamp))
+})
+
+function uploadImagesToWorkspace(paths: string[], workspaceName: string) {
+  return new Promise((resolve, reject) => {
+    const workspacePath = path.join(app.getAppPath(), workspaceName)
+    const imgPath = path.join(workspacePath, "OCR-D-IMG")
+    for(const _path of paths){
+      const baseName = path.parse(_path).base
+      const fileName = path.parse(_path).name
+      const target = path.join(imgPath, baseName)
+      fs.copyFileSync(_path, target)
+      const command = `docker run --rm -u $(id -u) -v ${workspacePath}:/data -w /data -- ocrd/all:maximum ocrd workspace add -G OCR-D-IMG -i OCR-D-IMG_${fileName} -g P_${fileName} -m image/tif OCR-D-IMG/${baseName}`
+      require('child_process').execSync(command);
+    }
+    resolve(true)
+  })
+}
+ipcMain.handle("upload-images-to-workspace", async (event, data) => {
+  return await uploadImagesToWorkspace(data.paths, data.workspaceName)
 })
 
 // New window example arg: new windows url
