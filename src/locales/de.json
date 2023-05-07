@@ -21,10 +21,23 @@
         "content": "Lade einen existierenden Workflow hoch und bearbeite ihn",
         "button": "Upload starten"
       },
+      "launch": {
+        "heading": "Ausführen",
+        "content": "Starte erstellte Workflows direkt aus NodeFlow heraus",
+        "button": "Command Center öffnen"
+      },
       "tour": {
         "heading": "Tour",
         "content": "Nimm an einer Tour durch den NodeFlow-Editor teil",
         "button": "Tour starten"
+      }
+    }
+  },
+  "command-center": {
+    "docker": {
+      "inactive": {
+        "not-responding": "Docker ist nicht erreichbar",
+        "install": "Installiere Docker"
       }
     }
   },

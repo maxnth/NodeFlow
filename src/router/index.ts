@@ -4,6 +4,7 @@ import DashboardPage from '../views/DashboardPage.vue';
 import EditorPage from '../views/EditorPage.vue';
 import TourPage from '../views/TourPage.vue';
 import NotFound from '../components/Layout/NotFound.vue';
+import CommandCenterPage from "../views/CommandCenterPage.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -20,6 +21,11 @@ const routes: RouteRecordRaw[] = [
     path: '/tour',
     name: 'tour',
     component: TourPage,
+  },
+  {
+    path: '/command-center',
+    name: 'command-center',
+    component: CommandCenterPage
   },
   {
     path: '/404',

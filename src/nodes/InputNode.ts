@@ -1,14 +1,18 @@
-import { NodeBuilder } from '@baklavajs/core';
+import {ButtonInterface, Node, NodeInterface } from "baklavajs";
+export default class InputNode extends Node<any, any> {
+  public type = "InputNode";
+  public title = "Input"
 
-export const InputNode = new NodeBuilder('InputNode')
-  .setName('Input')
-  .addOutputInterface('Output')
-  .addOption(
-    'Description',
-    'ButtonOption',
-    () => ({
-      description: 'The Input node represents the original input images',
-    }),
-    'SidebarDescriptionOption'
-  )
-  .build();
+  public inputs = {
+    "description": new ButtonInterface("Description", () => console.log("Description"))
+  };
+
+  public outputs = {
+    "output": new NodeInterface("Output", 0),
+  };
+
+  public constructor() {
+    super();
+    this.initializeIo();
+  }
+}

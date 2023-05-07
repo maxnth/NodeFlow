@@ -1,102 +1,82 @@
-<script>
-import SpeedDial from './UI/SpeedDial.vue';
-import HintOverlay from './UI/HintOverlay.vue';
-import EditorMenubar from './UI/EditorMenubar.vue';
+<script setup>
+import { EditorComponent, useBaklava  } from "baklavajs";
+import "@baklavajs/themes/dist/syrup-dark.css";
 
-import { Editor } from '@baklavajs/core';
-import { ViewPlugin } from '@baklavajs/plugin-renderer-vue3';
-import { OptionPlugin } from '@baklavajs/plugin-options-vue3';
-import { Engine } from '@baklavajs/plugin-engine';
+import InputNode from "~/nodes/InputNode";
+import {constructNodesFromFile} from "~/components/Editor/logic/NodeFactory";
+import {useEditorStore} from "~/stores/editor.store";
+import {addNodeWithCoordinates} from "~/utils/nodeEditor";
 
-import { InputNode } from '~/nodes/InputNode';
-
-import { importNodesFromFile } from '~/utils/NodeImport'
-import SidebarDescriptionOption from '~/components/Editor/Custom/SidebarDescriptionOption.vue';
+import CToolbar from "~/components/Editor/Custom/Toolbar.vue"
+import CPalette from "~/components/Editor/Custom/Palette.vue"
 import {ipcRenderer} from "electron";
 
-// TODO: still uses options API as baklavajs v1.x is buggy with the composition API. Should be migrated when baklavajs v2.x is stable
-export default {
-  // eslint-disable-next-line vue/no-unused-components
-  components: { HintOverlay, EditorMenubar, SpeedDial },
-  data() {
-    return {
-      editor: new Editor(),
-      viewPlugin: new ViewPlugin(),
-      engine: new Engine(false),
-      tour: null,
-    };
-  },
-  created() {
-    // Register the plugins
-    // The view plugin is used for rendering the nodes
-    this.editor.use(this.viewPlugin);
-    // The option plugin provides some default option UI elements
-    this.editor.use(new OptionPlugin());
-    // The engine plugin calculates the nodes in the graph in the
-    // correct order using the "calculate" methods of the nodes
-    // this.editor.use(this.engine);
+import { useToast } from 'primevue/usetoast';
+import {exportWorkflow} from "~/components/Editor/logic/WorkflowExporter";
 
-    // Show a minimap in the top right corner
-    this.viewPlugin.enableMinimap = true;
+const toast = useToast();
 
-    // register the nodes we have defined, so they can be
-    // added by the user as well as saved & loaded.
-    this.editor.registerNodeType('Input', InputNode);
+const editorStore = useEditorStore()
+const saveResults = ref('')
 
-    this.viewPlugin.registerOption(
-      'SidebarDescriptionOption',
-      SidebarDescriptionOption
-    );
+const baklava = useBaklava();
+const editor = baklava.editor
 
-    // NODES
-    Promise.resolve(importNodesFromFile()).then(nodes => {
-      for(const node of nodes){
-        this.editor.registerNodeType(node.name, node.interface, node.category)
-      }
+const { files, open, reset, onChange } = useFileDialog({multiple: false, accept: '*.json'})
+
+onChange(async (files) => {
+  if (files?.length > 0) {
+    const file = files?.item(0).path
+    await ipcRenderer.invoke("load-workflow-from-file", file).then((result) => {
+      editor.load(JSON.parse(result))
+      toast.add({ severity: 'success', summary: 'Success', detail: 'Workflow loaded', life: 3000 });
+      reset()
     })
+  }
+})
 
-    // add some nodes so the screen is not empty on startup
-    this.addNodeWithCoordinates(InputNode, 100, 350);
+editor.registerNodeType(InputNode)
 
-    this.engine.calculate();
-  },
-  methods: {
-    addNodeWithCoordinates(nodeType, x, y) {
-      const n = new nodeType();
-      this.editor.addNode(n);
-      n.position.x = x;
-      n.position.y = y;
-      return n;
-    },
-    upload(state) {
-      // TODO: Implement loading from files
-      // this.editor.load(state);
-    },
-    async download() {
-      // TODO: Implement saving current editor state to file correctly
-      ipcRenderer.send("save-file", JSON.stringify(this.editor.save()))
-      this.$toast.add({ severity: 'success', summary: 'Success', detail: 'Downloaded to Desktop', life: 1500 });
-    },
-    clear() {
-      // TODO: Find out why one can't just iterate once to remove all nodes
-      try {
-        while (this.editor.nodes.length > 0) {
-          for (const node of this.editor.nodes) {
-            this.editor.removeNode(node);
-          }
-        }
-      } catch (error) {
-        console.log('Something went wrong');
-      }
-    },
-  },
-};
+Promise.resolve(constructNodesFromFile()).then(nodes => {
+  for(const node of nodes){
+    editor.registerNodeType(node.node, {category: node.category})
+  }
+
+  if(editorStore.stack !== undefined && Object.keys(editorStore.stack).length){
+    baklava.editor.load(JSON.parse(editorStore.stack))
+    editorStore.stack = {}
+  }else{
+    addNodeWithCoordinates(baklava, InputNode, 50, 350);
+  }
+})
+
+function uploadState() {
+  open()
+}
+
+function downloadState() {
+  saveResults.value = JSON.stringify(editor.save())
+  ipcRenderer.send("save-file", saveResults.value)
+}
+
+function exportState() {
+  const stateExport = exportWorkflow(editor.save(), "external")
+  ipcRenderer.send("save-file", stateExport)
+}
 </script>
 
 <template>
-  <HintOverlay />
-  <SpeedDial @upload="upload" @download="download" @clear="clear" />
-  <baklava-editor id="editor" :plugin="viewPlugin" />
+  <Toast />
+  <EditorComponent id="editor" :view-model="baklava">
+    <template #toolbar>
+      <CToolbar @upload="uploadState" @download="downloadState" @export="exportState" />
+    </template>
+    <template #palette>
+      <CPalette />
+    </template>
+  </EditorComponent>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

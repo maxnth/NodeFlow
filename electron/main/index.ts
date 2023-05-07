@@ -1,7 +1,11 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, dialog, BrowserWindow, shell, ipcMain } from 'electron';
 import { release } from 'node:os';
 import { join } from 'node:path';
+import path from "path";
 
+const Docker = require('dockerode')
+const { exec } = require('child_process');
+const archiver = require('archiver');
 const fs = require("fs");
 
 // The built directory structure
@@ -107,13 +111,195 @@ app.on('activate', () => {
   }
 });
 
+async function saveFile(data){
+  const { canceled, filePath } = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+    properties: ['createDirectory']
+  })
+  if (canceled) {
+    return new Promise((resolve, reject) => {
+      resolve(false)
+    })
+  } else {
+    return new Promise((resolve, reject) => {
+      fs.writeFileSync(filePath, data)
+      resolve(true)
+    })
+  }
+}
+
 ipcMain.on('save-file', async (event, data) => {
-  const homeDir = require('os').homedir();
-  const desktopDir = `${homeDir}/Desktop`;
-  const outName = `${desktopDir}/workflow_${Math.floor(Date.now() / 1000)}.json`
-  fs.writeFileSync(outName, data);
+  return await saveFile(data)
 });
 
+async function exportResults(resultPath){
+  const { canceled, filePath } = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+    properties: ['createDirectory']
+  })
+  if (canceled) {
+    return new Promise((resolve, reject) => {
+      resolve(false)
+    })
+  } else {
+    const sourcePath = path.join(app.getAppPath(), resultPath)
+    const archive = archiver('zip', { zlib: { level: 9 }});
+    const stream = fs.createWriteStream(filePath);
+    return new Promise((resolve, reject) => {
+      archive
+        .directory(sourcePath, false)
+        .on('error', err => reject(err))
+        .pipe(stream)
+      ;
+
+      stream.on('close', () => resolve(true));
+      archive.finalize();
+    });
+  }
+}
+
+ipcMain.handle('export-results', async (event, resultPath) => {
+  return await exportResults(resultPath)
+});
+
+
+function loadWorkflowFromFile(path: string){
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, "utf8", (err, content) => {
+      if (err) {
+        return;
+      }
+      resolve(content)
+    })
+  })
+}
+ipcMain.handle('load-workflow-from-file', async (event, path: string) => {
+  return await loadWorkflowFromFile(path)
+})
+
+function isDockerAvailable () {
+  return new Promise((resolve, reject) => {
+    const docker = new Docker()
+    docker.listContainers(function (err, containers) {
+      resolve(!err)
+    });
+  })
+}
+ipcMain.handle('is-docker-available', async (event, ...args) => {
+  return await isDockerAvailable()
+})
+
+function pullOcrdDockerImage() {
+  return new Promise((resolve, reject) => {
+    const docker = new Docker()
+    docker.pull('ocrd/all:maximum', function (err, stream) {
+      docker.modem.followProgress(stream, onFinished, onProgress)
+      function onFinished(err, output) {
+        if(!err){
+          resolve(true)
+        }
+      }
+      function onProgress(event) {
+        if(event.progressDetail !== undefined){
+          const detail = event.progressDetail
+          if(detail.current !== undefined && detail.total !== undefined){
+            const percentage = Math.round(detail.total / detail.current)
+            console.log(percentage)
+          }
+        }
+      }
+    });
+  })
+}
+
+ipcMain.handle("pull-ocrd-docker-image", async (event, args) => {
+  return await pullOcrdDockerImage()
+})
+
+function launchWorkflow(data){
+  return new Promise((resolve, reject) => {
+    const command = `docker run --rm -v ${path.join(app.getAppPath(), data.workspace)}:/data -w /data -- ocrd/all:maximum ${data.processString}`
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        resolve(false)
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        resolve(false)
+      }
+      resolve(true)
+    });
+
+  })
+}
+
+ipcMain.handle("launch-workflow", async(event, data) => {
+  return await launchWorkflow(data)
+})
+
+ipcMain.on('open-docker-setup-guide', (event, ...args) => {
+  require('electron').shell.openExternal("https://docs.docker.com/get-docker/");
+})
+
+async function getDirectory() {
+  const { canceled, filePaths } = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
+    properties: ['openDirectory']
+  })
+  if (canceled) {
+    return
+  } else {
+    return new Promise((resolve, reject) => {
+      resolve(filePaths[0])
+    })
+  }
+}
+
+ipcMain.handle("get-directory", async (event, args) => {
+  return await getDirectory()
+})
+
+function initOcrdWorkspace(_path: string) {
+  return new Promise((resolve, reject) => {
+    fs.mkdirSync(_path)
+    fs.mkdirSync(path.join(_path, "OCR-D-IMG"))
+    const command = `docker run --rm -v ${_path}:/data -w /data -- ocrd/all:maximum ocrd workspace -d /data init`
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        resolve(false)
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        if(!stderr.includes("Writing METS to /data/mets.xml")) resolve(false)
+      }
+      console.log(`stdout: ${stdout}`);
+      resolve(true)
+    });
+
+  })
+}
+
+ipcMain.handle("init-ocrd-workspace", async (event, timestamp: string) => {
+  return await initOcrdWorkspace(path.join(app.getAppPath(), timestamp))
+})
+
+function uploadImagesToWorkspace(paths: string[], workspaceName: string) {
+  return new Promise((resolve, reject) => {
+    const workspacePath = path.join(app.getAppPath(), workspaceName)
+    const imgPath = path.join(workspacePath, "OCR-D-IMG")
+    for(const _path of paths){
+      const baseName = path.parse(_path).base
+      const fileName = path.parse(_path).name
+      const target = path.join(imgPath, baseName)
+      fs.copyFileSync(_path, target)
+      const command = `docker run --rm -v ${workspacePath}:/data -w /data -- ocrd/all:maximum ocrd workspace add -G OCR-D-IMG -i OCR-D-IMG_${fileName} -g P_${fileName} -m image/tif OCR-D-IMG/${baseName}`
+      require('child_process').execSync(command);
+    }
+    resolve(true)
+  })
+}
+ipcMain.handle("upload-images-to-workspace", async (event, data) => {
+  return await uploadImagesToWorkspace(data.paths, data.workspaceName)
+})
 
 // New window example arg: new windows url
 ipcMain.handle('open-win', (_, arg) => {

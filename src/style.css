@@ -31,11 +31,11 @@
   @apply bg-gray-200 dark:bg-gray-700;
 }
 
-.minimap {
-  height: auto !important;
-  width: auto !important;
-}
-
 .dark-context-menu{
   min-width: 15rem !important;
+}
+
+.baklava-node-palette {
+  right: 0;
+  left: initial;
 }
