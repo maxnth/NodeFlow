@@ -13,8 +13,9 @@ const isUploading = ref(false)
 const { files, open, reset, onChange } = useFileDialog({multiple: true})
 
 onChange(async (files) => {
-  if (files?.length > 0) {
+  if (files!.length > 0) {
     const paths = []
+    // @ts-ignore
     for(const file of files){
       paths.push(file.path)
     }

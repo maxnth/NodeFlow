@@ -17,8 +17,8 @@ const processString = ref("")
 const isWorkflowRunning = ref(false)
 
 onChange(async (files) => {
-  if (files?.length === 1) {
-    selectedWorkflow.value = files.item(0).path
+  if (files!.length === 1) {
+    selectedWorkflow.value = files!.item(0)!.path
   }
 })
 function openFileDialog(){
