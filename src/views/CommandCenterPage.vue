@@ -5,6 +5,8 @@ import Docker from "../components/CommandCenter/Docker.vue";
 import Export from "../components/CommandCenter/Export.vue";
 import ImageImport from "../components/CommandCenter/ImageImport.vue";
 import Workflow from "../components/CommandCenter/Workflow.vue";
+import Success from "../components/CommandCenter/Success.vue";
+
 import {useCommandCenterStore} from "../stores/commandCenter.store";
 
 const steps = [{label: "Docker"}, {label: "Image Import"}, {label: "Workflow"}, {label: "Export"}]
@@ -13,9 +15,8 @@ const step = ref(0)
 const store = useCommandCenterStore()
 
 async function initOcrdWorkspace() {
-  store.workspace = `${Date.now()}`
-  ipcRenderer.invoke("init-ocrd-workspace", store.workspace).then((result) => {
-    console.log(result)
+  store.workspace = `tmp_${Date.now()}`
+  ipcRenderer.invoke("init-ocrd-workspace", store.workspace).then(() => {
   })
 }
 
@@ -32,6 +33,9 @@ function next(completedStep: string){
       step.value += 1
       break;
     case "export":
+      step.value += 1
+      break;
+    case "success":
       step.value = 0
   }
 }
@@ -71,6 +75,7 @@ const { t } = useI18n();
   <ImageImport v-if="step === 1" @completed="next('import')" />
   <Workflow v-if="step === 2" @completed="next('workflow')" />
   <Export v-if="step === 3" @completed="next('export')" />
+  <Success v-if="step === 4" @completed="next('success')" />
 </template>
 
 <style scoped>

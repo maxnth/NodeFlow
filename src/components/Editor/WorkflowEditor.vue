@@ -60,7 +60,7 @@ function downloadState() {
 }
 
 function exportState() {
-  const stateExport = exportWorkflow(editor.save().graph)
+  const stateExport = exportWorkflow(editor.save(), "external")
   ipcRenderer.send("save-file", stateExport)
 }
 </script>

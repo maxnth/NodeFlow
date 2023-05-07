@@ -64,20 +64,29 @@ function filterFlatMap(flatMap, idNameMap){
   return filteredFlatMap
 }
 
-function buildExportStringFromPaths(paths){
+function buildExportString(processString, mode) {
+  switch(mode){
+    case "external":
+      return [
+        "docker",
+        "run",
+        "--rm",
+        "-u",
+        "$(id -u)",
+        "-v",
+        "$PWD:/data",
+        "-w",
+        "/data",
+        "--",
+        "ocrd/all:maximum"].concat(processString).join(" ")
+    case "internal":
+      return processString.join(" ")
+  }
+}
+
+function buildProcessStringFromPaths(paths){
   const reservedNames = ["Description", "Input", "Output"]
   const call = [
-    "docker",
-    "run",
-    "--rm",
-    "-u",
-    "$(id -u)",
-    "-v",
-    "$PWD:/data",
-    "-w",
-    "/data",
-    "--",
-    "ocrd/all:maximum",
     "ocrd",
     "process"
   ]
@@ -107,10 +116,11 @@ function buildExportStringFromPaths(paths){
       call.push("'" + processorCall.join(" ") + "'")
     }
   }
-  return call.join(" ")
+  return call
 }
 
-export function exportWorkflow(graph){
+export function exportWorkflow(state, mode){
+  const graph = state.graph
   const inputNode = hasInputNode(graph)
   if(!inputNode){
     return false
@@ -152,5 +162,6 @@ export function exportWorkflow(graph){
 
   const tree = flatMapToTree(filteredFlatMap)
   const paths = traverseTree(tree, nodeMap)
-  return buildExportStringFromPaths(paths)
+  const processString = buildProcessStringFromPaths(paths)
+  return buildExportString(processString, mode)
 }
