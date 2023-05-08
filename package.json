@@ -1,6 +1,6 @@
 {
   "name": "node-flow",
-  "version": "0.0.2",
+  "version": "0.0.3-dev",
   "description": "Desktop application for crafting OCR workflows",
   "author": "Maximilian Nöth<maximilian.noeth@uni-wuerzburg.de>",
   "license": "MIT",
