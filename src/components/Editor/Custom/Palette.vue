@@ -96,19 +96,30 @@ export default defineComponent({
 
 <template>
   <div class="baklava-node-palette">
-    <section v-for="c in categories" :key="c.name">
-
-      <h1 v-if="c.name !== 'default'">
-        {{ c.name }}
-      </h1>
-      <PaletteEntry
-        v-for="(ni, nt) in c.nodeTypes"
-        :key="nt"
-        :type="nt"
-        :title="ni.title"
-        @pointerdown="onDragStart(nt, ni)"
-      />
-    </section>
+    <h1 class="text-black dark:text-white text-lg mb-2 text-center">Available Processors</h1>
+    <Accordion
+      :multiple="true">
+      <template
+        v-for="c in categories"
+        :key="c.name">
+        <AccordionTab
+          :header="c.name"
+          :pt="{
+            headerAction: { class: '!bg-gray-200 dark:!bg-gray-800' },
+            headerIcon: { class: 'text-black dark:text-white' },
+            headerTitle: { class: 'text-black dark:text-white' },
+            content: { class: 'bg-gray-50 dark:bg-gray-700' }
+          }">
+          <PaletteEntry
+            v-for="(ni, nt) in c.nodeTypes"
+            :key="nt"
+            :type="nt"
+            :title="ni.title"
+            @pointerdown="onDragStart(nt, ni)"
+          />
+        </AccordionTab>
+      </template>
+    </Accordion>
   </div>
   <transition name="fade">
     <div v-if="draggedNode" class="baklava-dragged-node" :style="draggedNodeStyles">
@@ -116,3 +127,11 @@ export default defineComponent({
     </div>
   </transition>
 </template>
+
+<style scoped>
+.baklava-node-palette {
+  @apply bg-white dark:bg-gray-700 outline-1 outline-black;
+  right: 0;
+  left: initial;
+}
+</style>

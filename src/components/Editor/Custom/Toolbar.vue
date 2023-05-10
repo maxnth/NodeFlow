@@ -19,21 +19,27 @@ const emit = defineEmits(['upload', 'download', 'export']);
   <div class="baklava-toolbar">
     <div class="flex space-x-4">
       <ArrowUturnLeftIcon
-        class="h-6 w-6 text-gray-500 hover:text-white hover:cursor-pointer"
+        class="h-6 w-6 text-gray-500 dark:text-gray-400 dark:hover:text-white hover:text-black hover:cursor-pointer"
         @click="viewModel.commandHandler.executeCommand(Commands.UNDO_COMMAND)" />
       <ArrowUturnRightIcon
-        class="h-6 w-6 text-gray-500 hover:text-white hover:cursor-pointer"
+        class="h-6 w-6 text-gray-500 dark:text-gray-400 dark:hover:text-white hover:text-black hover:cursor-pointer"
         @click="viewModel.commandHandler.executeCommand(Commands.REDO_COMMAND)" />
       <div class="inline-block w-0.5 self-stretch bg-gray-500 opacity-100 dark:opacity-50"></div>
       <DocumentArrowUpIcon
-        class="h-6 w-6 text-gray-500 hover:text-white hover:cursor-pointer"
+        class="h-6 w-6 text-gray-500 dark:text-gray-400 dark:hover:text-white hover:text-black hover:cursor-pointer"
         @click='emit("upload")' />
       <DocumentArrowDownIcon
-        class="h-6 w-6 text-gray-500 hover:text-white hover:cursor-pointer"
+        class="h-6 w-6 text-gray-500 dark:text-gray-400 dark:hover:text-white hover:text-black hover:cursor-pointer"
         @click='emit("download")' />
       <ArrowDownOnSquareStackIcon
-        class="h-6 w-6 text-gray-500 hover:text-white hover:cursor-pointer"
+        class="h-6 w-6 text-gray-500 dark:text-gray-400 dark:hover:text-white hover:text-black hover:cursor-pointer"
         @click='emit("export")' />
     </div>
   </div>
 </template>
+
+<style scoped>
+.baklava-toolbar{
+  @apply bg-white dark:bg-gray-700 shadow-md z-10
+}
+</style>

@@ -22,6 +22,8 @@ import VueShepherd from 'vue-shepherd';
 import 'shepherd.js/dist/css/shepherd.css';
 
 import './style.css';
+import Accordion from "primevue/accordion";
+import AccordionTab from "primevue/accordiontab";
 
 const app = createApp(App);
 
@@ -56,6 +58,8 @@ app.use(VueShepherd);
 app.component('SpeedDial', SpeedDial);
 app.component('Dropdown', Dropdown);
 app.component('Menubar', Menubar);
+app.component('Accordion', Accordion)
+app.component('AccordionTab', AccordionTab)
 
 app.mount('#app').$nextTick(() => {
   postMessage({ payload: 'removeLoading' }, '*');

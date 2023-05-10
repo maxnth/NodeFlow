@@ -1,6 +1,5 @@
 <script setup>
 import { EditorComponent, useBaklava  } from "baklavajs";
-import "@baklavajs/themes/dist/syrup-dark.css";
 
 import InputNode from "~/nodes/InputNode";
 import {constructNodesFromFile} from "~/components/Editor/logic/NodeFactory";
@@ -77,6 +76,7 @@ function exportState() {
   </EditorComponent>
 </template>
 
-<style scoped>
 
+<style>
+@import "/assets/nodeflow-custom.css";
 </style>
