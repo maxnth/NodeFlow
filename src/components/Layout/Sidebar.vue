@@ -50,13 +50,13 @@ function openSettingsModel(){
 <template>
   <SettingsModal ref="settingsRef" />
   <div
-    class="flex w-16 sm:w-64 flex-col justify-between overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800"
+    class="flex w-16 sm:w-64 flex-col justify-between bg-gray-50 px-3 py-4 dark:bg-gray-800"
   >
     <div>
-      <a class="mb-5 flex items-center pl-2.5">
+      <a class="mb-5 flex items-center pl-1.5 sm:pl-2.5">
         <img
           src="/images/application/icon.svg"
-          class="mr-3 h-6 sm:h-7"
+          class="mr-3 h-7"
           alt="NodeFlow Logo"
         />
         <span
@@ -67,7 +67,7 @@ function openSettingsModel(){
       <ul class="space-y-2">
         <li v-for="(item, index) in sidebarEntries" :key="index">
           <router-link :to="item.to" class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-            <component :is="item.icon" class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+            <component :is="item.icon" class="sm:h-6 sm:w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
             <span class="ml-3 truncate hidden sm:block">{{ item.label }}</span>
           </router-link>
         </li>
