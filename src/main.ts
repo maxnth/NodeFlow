@@ -24,6 +24,7 @@ import 'shepherd.js/dist/css/shepherd.css';
 import './style.css';
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
+import Tooltip from 'primevue/tooltip'
 
 const app = createApp(App);
 
@@ -60,6 +61,7 @@ app.component('Dropdown', Dropdown);
 app.component('Menubar', Menubar);
 app.component('Accordion', Accordion)
 app.component('AccordionTab', AccordionTab)
+app.directive('tooltip', Tooltip)
 
 app.mount('#app').$nextTick(() => {
   postMessage({ payload: 'removeLoading' }, '*');
