@@ -19,6 +19,29 @@ const ctaHidden = ref(false);
 
 const { t } = useI18n();
 
+const sidebarEntries = [
+  {
+    label: "Dashboard",
+    to: "/",
+    icon: HomeIcon
+  },
+  {
+    label: "Workflow Editor",
+    to: "/editor",
+    icon: CubeTransparentIcon
+  },
+  {
+    label: "Command Center",
+    to: "/command-center",
+    icon: CommandLineIcon
+  },
+  {
+    label: "Tour",
+    to: "/tour",
+    icon: PresentationChartLineIcon
+  },
+]
+
 function openSettingsModel(){
   settingsRef.value.openModal()
 }
@@ -27,63 +50,25 @@ function openSettingsModel(){
 <template>
   <SettingsModal ref="settingsRef" />
   <div
-    class="flex w-64 flex-col justify-between overflow-y-auto bg-gray-50 px-3 py-4 dark:bg-gray-800"
+    class="flex w-16 sm:w-64 flex-col justify-between bg-gray-50 px-3 py-4 dark:bg-gray-800"
   >
     <div>
-      <a class="mb-5 flex items-center pl-2.5">
+      <a class="mb-5 flex items-center pl-1.5 sm:pl-2.5">
         <img
           src="/images/application/icon.svg"
-          class="mr-3 h-6 sm:h-7"
+          class="mr-3 h-7"
           alt="NodeFlow Logo"
         />
         <span
-          class="self-center whitespace-nowrap text-xl font-semibold text-black dark:text-white"
+          class="self-center whitespace-nowrap text-xl font-semibold text-black dark:text-white hidden sm:block"
           >NodeFlow</span
         >
       </a>
       <ul class="space-y-2">
-        <li>
-          <router-link
-            to="/"
-            class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-          >
-            <HomeIcon
-              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-            />
-            <span class="ml-3 truncate">Dashboard</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/editor"
-            class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-          >
-            <CubeTransparentIcon
-              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-            />
-            <span class="ml-3 truncate">Workflow Editor</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/command-center"
-            class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-          >
-            <CommandLineIcon
-              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-            />
-            <span class="ml-3 truncate">Command Center</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link
-            to="/tour"
-            class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-          >
-            <PresentationChartLineIcon
-              class="h-6 w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-            />
-            <span class="ml-3 truncate">Tour</span>
+        <li v-for="(item, index) in sidebarEntries" :key="index">
+          <router-link :to="item.to" class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+            <component :is="item.icon" class="sm:h-6 sm:w-6 flex-shrink-0 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" />
+            <span class="ml-3 truncate hidden sm:block">{{ item.label }}</span>
           </router-link>
         </li>
       </ul>
@@ -126,7 +111,7 @@ function openSettingsModel(){
     </div>
 
     <div
-      class="mt-4 flex justify-between border-t border-gray-200 pl-2.5 pr-2.5 pt-4 dark:border-gray-700"
+      class="mt-4 justify-between border-t border-gray-200 pl-2.5 pr-2.5 pt-4 dark:border-gray-700 hidden sm:flex"
     >
       <div class="dark-toggle-container">
         <button class="text-center" @click="toggleDark()">

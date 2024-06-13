@@ -5,6 +5,7 @@ const node_path = require("node:path");
 const path = require("path");
 const Docker = require("dockerode");
 const { exec } = require("child_process");
+const archiver = require("archiver");
 const fs = require("fs");
 process.env.DIST_ELECTRON = node_path.join(__dirname, "..");
 process.env.DIST = node_path.join(process.env.DIST_ELECTRON, "../dist");
@@ -101,13 +102,17 @@ async function exportResults(resultPath) {
       resolve(false);
     });
   } else {
+    const sourcePath = path.join(electron.app.getAppPath(), resultPath);
+    const archive = archiver("zip", { zlib: { level: 9 } });
+    const stream = fs.createWriteStream(filePath);
     return new Promise((resolve, reject) => {
-      fs.writeFileSync(filePath, resultPath);
-      resolve(true);
+      archive.directory(sourcePath, false).on("error", (err) => reject(err)).pipe(stream);
+      stream.on("close", () => resolve(true));
+      archive.finalize();
     });
   }
 }
-electron.ipcMain.on("export-results", async (event, resultPath) => {
+electron.ipcMain.handle("export-results", async (event, resultPath) => {
   return await exportResults(resultPath);
 });
 function loadWorkflowFromFile(path2) {
@@ -159,6 +164,25 @@ function pullOcrdDockerImage() {
 electron.ipcMain.handle("pull-ocrd-docker-image", async (event, args) => {
   return await pullOcrdDockerImage();
 });
+function launchWorkflow(data) {
+  return new Promise((resolve, reject) => {
+    const command = `docker run --rm -v ${path.join(electron.app.getAppPath(), data.workspace)}:/data -w /data -- ocrd/all:maximum ${data.processString}`;
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+        resolve(false);
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        resolve(false);
+      }
+      resolve(true);
+    });
+  });
+}
+electron.ipcMain.handle("launch-workflow", async (event, data) => {
+  return await launchWorkflow(data);
+});
 electron.ipcMain.on("open-docker-setup-guide", (event, ...args) => {
   require("electron").shell.openExternal("https://docs.docker.com/get-docker/");
 });
@@ -209,7 +233,7 @@ function uploadImagesToWorkspace(paths, workspaceName) {
       const fileName = path.parse(_path).name;
       const target = path.join(imgPath, baseName);
       fs.copyFileSync(_path, target);
-      const command = `docker run --rm -u $(id -u) -v ${workspacePath}:/data -w /data -- ocrd/all:maximum ocrd workspace add -G OCR-D-IMG -i OCR-D-IMG_${fileName} -g P_${fileName} -m image/tif OCR-D-IMG/${baseName}`;
+      const command = `docker run --rm -v ${workspacePath}:/data -w /data -- ocrd/all:maximum ocrd workspace add -G OCR-D-IMG -i OCR-D-IMG_${fileName} -g P_${fileName} -m image/tif OCR-D-IMG/${baseName}`;
       require("child_process").execSync(command);
     }
     resolve(true);

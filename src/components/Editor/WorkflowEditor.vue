@@ -1,6 +1,5 @@
 <script setup>
 import { EditorComponent, useBaklava  } from "baklavajs";
-import "@baklavajs/themes/dist/syrup-dark.css";
 
 import InputNode from "~/nodes/InputNode";
 import {constructNodesFromFile} from "~/components/Editor/logic/NodeFactory";
@@ -8,6 +7,7 @@ import {useEditorStore} from "~/stores/editor.store";
 import {addNodeWithCoordinates} from "~/utils/nodeEditor";
 
 import CToolbar from "~/components/Editor/Custom/Toolbar.vue"
+import CNode from "~/components/Editor/Custom/Node.vue";
 import CPalette from "~/components/Editor/Custom/Palette.vue"
 import {ipcRenderer} from "electron";
 
@@ -21,6 +21,7 @@ const saveResults = ref('')
 
 const baklava = useBaklava();
 const editor = baklava.editor
+const palette = ref()
 
 const { files, open, reset, onChange } = useFileDialog({multiple: false, accept: '*.json'})
 
@@ -63,20 +64,32 @@ function exportState() {
   const stateExport = exportWorkflow(editor.save(), "external")
   ipcRenderer.send("save-file", stateExport)
 }
+
+function togglePalette() {
+  palette.value.toggleVisibility();
+}
 </script>
 
 <template>
   <Toast />
   <EditorComponent id="editor" :view-model="baklava">
     <template #toolbar>
-      <CToolbar @upload="uploadState" @download="downloadState" @export="exportState" />
+      <CToolbar
+        @upload="uploadState"
+        @download="downloadState"
+        @export="exportState"
+        @toggle-palette="togglePalette" />
     </template>
     <template #palette>
-      <CPalette />
+      <CPalette ref="palette" />
+    </template>
+    <template #node="nodeProps">
+      <CNode :key="nodeProps.node.id" v-bind="nodeProps" />
     </template>
   </EditorComponent>
 </template>
 
-<style scoped>
 
+<style>
+@import "/assets/nodeflow-custom.css";
 </style>
