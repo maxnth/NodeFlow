@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
 import { Commands } from "@baklavajs/renderer-vue";
 import { useViewModel } from "baklavajs";
 

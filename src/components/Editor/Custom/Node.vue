@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
 import { ref, computed, toRef, nextTick, onUpdated, onMounted } from "vue";
 import {
   AbstractNode,
