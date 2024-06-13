@@ -72,7 +72,7 @@
           >
             <div class="grid grid-flow-row-dense grid-cols-3 gap-4">
               <a
-                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.1-alpha/NodeFlow_0.0.1.dmg"
+                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.2-alpha/NodeFlow-0.0.2.dmg"
                 class="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
               >
                 <Icon class="mr-5 text-white" name="simple-icons:apple" />
@@ -82,7 +82,7 @@
                 </div>
               </a>
               <a
-                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.1-alpha/NodeFlow-0.0.1.AppImage"
+                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.2-alpha/NodeFlow-0.0.2.AppImage"
                 class="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
               >
                 <Icon class="mr-5 text-white" name="simple-icons:linux" />
@@ -92,7 +92,7 @@
                 </div>
               </a>
               <a
-                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.1-alpha/NodeFlow_0.0.1.msi"
+                href="https://github.com/maxnth/NodeFlow/releases/download/0.0.2-alpha/NodeFlow-0.0.2.msi"
                 class="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-4 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 sm:w-auto"
               >
                 <Icon class="mr-5 text-white" name="simple-icons:windows" />
