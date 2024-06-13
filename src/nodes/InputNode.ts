@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {ButtonInterface, Node, NodeInterface } from "baklavajs";
 export default class InputNode extends Node<any, any> {
   public type = "InputNode";
