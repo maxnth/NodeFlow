@@ -3,7 +3,7 @@ import {
   ButtonInterface,
   CheckboxInterface,
   IntegerInterface,
-  Node,
+  defineNode,
   NodeInterface,
   NumberInterface,
   SelectInterface,
@@ -49,44 +49,34 @@ function createNodeType(name: string, nodeData: INode) {
       switch (paramData.type) {
         case "string":
           if (paramData.enum !== undefined) {
-            inputs[paramName] = new SelectInterface(paramName, paramData.default, paramData.enum).setPort(false).use(allowMultipleConnections)
+            inputs[paramName] = () => new SelectInterface(paramName, paramData.default, paramData.enum).setPort(false).use(allowMultipleConnections)
           } else {
-            inputs[paramName] = new TextInputInterface(paramName, paramData.default).setPort(false)
+            inputs[paramName] = () => new TextInputInterface(paramName, paramData.default).setPort(false)
           }
           break;
         case "number":
           if (paramData.format === "integer") {
-            inputs[paramName] = new IntegerInterface(paramName, paramData.default).setPort(false)
+            inputs[paramName] = () => new IntegerInterface(paramName, paramData.default).setPort(false)
           } else if (paramData.format === "float") {
-            inputs[paramName] = new NumberInterface(paramName, paramData.default).setPort(false)
+            inputs[paramName] = () => new NumberInterface(paramName, paramData.default).setPort(false)
           }
           break;
         case "boolean":
-          inputs[paramName] = new CheckboxInterface(paramName, paramData.default).setPort(false)
+          inputs[paramName] = () => new CheckboxInterface(paramName, paramData.default).setPort(false)
           break;
       }
     }
   }
-  inputs["Input"] = new NodeInterface("Input", 0)
-  inputs["Description"] = new ButtonInterface("Description", () => console.log("Description"))
+  inputs["Input"] = () => new NodeInterface("Input", 0)
+  inputs["Description"] = () => new ButtonInterface("Description", () => console.log("Description"))
 
   const outputs = {
-    "Output": new NodeInterface("Output", 0)
+    "Output": () => new NodeInterface("Output", 0)
   }
 
-  return class extends Node<any, any> {
-    public title = name
-    public type = name
-    // @ts-ignore
-    public inputs = inputs
-    public outputs = outputs
-    constructor() {
-      super();
-      this.title = name
-      this.type = name
-      this.inputs = inputs
-      this.outputs = outputs
-      this.initializeIo();
-    }
-  }
+  return defineNode({
+    type: name,
+    inputs: inputs,
+    outputs: outputs,
+  })
 }

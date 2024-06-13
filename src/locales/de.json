@@ -33,6 +33,19 @@
       }
     }
   },
+  "nodeflow": {
+    "node": {
+      "settings": "Parameter"
+    },
+    "palette": {
+      "processors": "Prozessoren"
+    },
+    "toolbar": {
+      "toggle-palette": {
+        "tooltip": "Toolbar umschalten"
+      }
+    }
+  },
   "command-center": {
     "docker": {
       "inactive": {
